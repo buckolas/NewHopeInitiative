@@ -1,0 +1,22 @@
+<h1>Listing All Kibera Children</h1>
+
+<table>
+  <tr>
+    <th>Last Name, First</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @kibera_children.each do |kibera_child| %>
+  <tr>
+    <td><%= link_to kibera_child.lastName + ', ' + kibera_child.firstName, kibera_child %></td>
+    <td><%= link_to image_tag("edit_24x24.png", :border=>0, :alt =>  "Edit", :title =>  "Edit"), edit_kibera_child_path(kibera_child)%></td>
+    <td><%= link_to image_tag("trash_24x24.png", :border=>0, :alt =>  "Delete", :title =>  "Delete"), kibera_child, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add New Child', new_kibera_child_path %>
