@@ -5,49 +5,9 @@
  *= require_self
  *= require_tree . 
 */
-a:link    {color:green;}
-a:visited {color:green;}
-a:hover   {color:red;}
-a:active  {color:yellow;}
 
-#header{
-    background: #222;
-    background-image: linear-gradient(bottom, #0A0A0A 9%, #4E4E4E 100%);
-    background-image: -o-linear-gradient(bottom, #0A0A0A 9%, #4E4E4E 100%);
-    background-image: -moz-linear-gradient(bottom, #0A0A0A 9%, #4E4E4E 100%);
-    background-image: -webkit-linear-gradient(bottom, #0A0A0A 9%, #4E4E4E 100%);
-    background-image: -ms-linear-gradient(bottom, #0A0A0A 9%, #4E4E4E 100%);
 
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.09, #0A0A0A),
-        color-stop(1, #4E4E4E)
-    );
-    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
-    color:#FFF;
-}
-
-#header ul{
-    margin:0;
-    list-style-type:none;
-    padding:5px 0;
-}
-
-#header ul li{
-    display:inline;
-    padding-left:10px;
-}
-
-#header ul li a:visited
-{
-    color:#FFF;
-}
-
-.image-left{
+#new-hope-logo{
     overflow:auto;
     text-transform:uppercase;
     font-size:28px;
@@ -55,94 +15,38 @@ a:active  {color:yellow;}
     line-height:normal;
     font-weight:lighter;
     letter-spacing:16px;
+	display:inline;
+	color:#434343;
 }
 
-.image-left img{
+#new-hope-logo img{
     float:left;
     padding:5px;
 }
 
-.image-left span{
+#new-hope-logo span{
     padding-left:5px;
 }
 
-body {
-  background-color: #4B7399;
-  font-family: Verdana, Helvetica, Arial;
-  font-size: 14px;
+#new-hope-logo .new-hope-text{
+	color:#8daf3f;
+	font-size:48px;
+	letter-spacing:5px;
 }
 
-a img {
-  border: none;
+.children-pagination-info{
+	text-align:center;
 }
 
-a:hover {
-  border: none;
-  text-decoration: none;
+.footer{
+	margin-top: 45px;
+	padding: 35px 0 36px;
+	border-top: 1px solid #E5E5E5;
+	color: #555;
 }
 
-a {
-  color: #0000FF;
-}
-
-.clear {
-  clear: both;
-  height: 0;
-  overflow: hidden;
-}
-
-#container {
-  width: 75%;
-  margin: 0 auto;
-  background-color: #FFF;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
-}
-
-#flash_notice, #flash_error, #flash_alert {
-  padding: 5px 8px;
-  margin: 10px 0;
-}
-
-#flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
-}
-
-#flash_error, #flash_alert {
-  background-color: #FCC;
-  border: solid 1px #C66;
-}
-
-.fieldWithErrors {
-  display: inline;
-}
-
-.error_messages {
-  width: 400px;
-  border: 2px solid #CF0000;
-  padding: 0px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  font-size: 12px;
-}
-
-.error_messages h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 10px;
-  font-size: 12px;
-  margin: 0;
-  background-color: #c00;
-  color: #fff;
-}
-
-.error_messages p {
-  margin: 8px 10px;
-}
-
-.error_messages ul {
-  margin: 0;
+.footer a, .footer a:link, .footer a:visited, .footer a:active{
+	margin-right: 15px;
+	font-weight: 300;
+	color: #555;
 }

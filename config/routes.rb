@@ -1,13 +1,12 @@
 ChildMonitor::Application.routes.draw do
   
-    resources :user_sessions
-    resources :users
-    resources :kibera_children
-
-    get "administration/index"
-    
-    match "login" => "user_sessions#new", :as => :login
-    match "logout" => "user_sessions#destroy", :as => :logout 
+  resources :user_sessions
+  resources :users
+  resources :kibera_children
+  resources :import
+  
+  match "login" => "user_sessions#new", :as => :login
+  match "logout" => "user_sessions#destroy", :as => :logout 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
   skip_before_filter :require_login
+  before_filter :is_currently_logged_in, :only => [:new]
     
   def new
     @user_session = UserSession.new
@@ -18,5 +19,13 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.find(params[:id])
     @user_session.destroy
     redirect_to root_url, :notice => "Successfully logged out."
+  end
+  
+  private
+  
+  def is_currently_logged_in
+      if current_user_session
+          redirect_to root_url
+      end
   end
 end

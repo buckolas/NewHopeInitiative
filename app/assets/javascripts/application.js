@@ -6,4 +6,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
+
+$(document).ready(function() {
+	$("a.delete-confirm").click(function(e) {
+	    e.preventDefault();
+		var deleteHref = this.href;
+	    bootbox.confirm("Are you sure you want to delete this child?", function(result) {
+		    if (result) {
+				$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
+	                .append('<input type="hidden" name="_method" value="delete" />')
+	                .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
+	                .appendTo('body')
+	                .submit();
+		    }
+		});
+		return false;
+	});
+});

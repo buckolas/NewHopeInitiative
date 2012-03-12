@@ -1,22 +1,33 @@
-<h1>Listing All Kibera Children</h1>
+<% title "Kibera Children" %>
 
-<table>
-  <tr>
-    <th>Last Name, First</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<% if @kibera_children.count > 0 %>
 
-<% @kibera_children.each do |kibera_child| %>
-  <tr>
-    <td><%= link_to kibera_child.lastName + ', ' + kibera_child.firstName, kibera_child %></td>
-    <td><%= link_to image_tag("edit_24x24.png", :border=>0, :alt =>  "Edit", :title =>  "Edit"), edit_kibera_child_path(kibera_child)%></td>
-    <td><%= link_to image_tag("trash_24x24.png", :border=>0, :alt =>  "Delete", :title =>  "Delete"), kibera_child, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+	<%= will_paginate @kibera_children, :class => "pagination1" %>
+	
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Actions</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @kibera_children.each do |kibera_child| %>
+	      <tr>
+	        <td><%= link_to kibera_child.first_name + ' ' + kibera_child.last_name, kibera_child_path(kibera_child) %></td>
+	        <td>
+	          <%= link_to content_tag('i', '', :class => 'icon-pencil'), edit_kibera_child_path(kibera_child), :class => 'btn btn-mini', :title => "Edit" %>
+	          <%= link_to content_tag('i', '', :class => 'icon-trash icon-white'), kibera_child_path(kibera_child), :method => :delete, :class => 'btn btn-mini btn-danger delete-confirm', :title => "Delete" %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<p class="children-pagination-info"><%= page_entries_info @kibera_children, :model => 'child' %></p>
+	
+<% else %>
+	<p>There are no children entered at this time.</p>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'Add New Child', new_kibera_child_path %>
+<%= link_to 'Add New Child', new_kibera_child_path, :class => 'btn btn-primary' %>

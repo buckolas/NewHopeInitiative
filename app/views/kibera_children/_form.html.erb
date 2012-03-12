@@ -1,25 +1,14 @@
-<%= form_for(@kibera_child) do |f| %>
-  <% if @kibera_child.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@kibera_child.errors.count, "error") %> prohibited this kibera_child from being saved:</h2>
+<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Kibera Child</legend>
 
-      <ul>
-      <% @kibera_child.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+	<%= f.input :image, :label => 'Child Photo', :as => :file %>
+    <%= f.input :first_name, :label => "First Name" %>
+	<%= f.input :last_name, :label => "Last Name" %>
+
+    <div class="form-actions">
+      <%= f.submit 'Save', :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', kibera_children_path, :class => 'btn' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :firstName %><br />
-    <%= f.text_field :firstName %>
-  </div>
-  <div class="field">
-    <%= f.label :lastName %><br />
-    <%= f.text_field :lastName %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </fieldset>
 <% end %>

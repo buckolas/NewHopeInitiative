@@ -2,7 +2,7 @@ class KiberaChildrenController < ApplicationController
   # GET /kibera_children
   # GET /kibera_children.json
   def index
-    @kibera_children = KiberaChild.all
+    @kibera_children = KiberaChild.order("last_name").page(params[:page]).per_page(25)
 
     respond_to do |format|
       format.html # index.html.erb

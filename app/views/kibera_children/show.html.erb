@@ -1,15 +1,166 @@
-<p id="notice"><%= notice %></p>
+<% title 'Child Info' %>
 
-<p>
-  <b>Firstname:</b>
-  <%= @kibera_child.firstName %>
-</p>
+<div class="container">
+	<div class="row">
+		
+		<% if @kibera_child.image? %>
+			<div class="span3">
+				<ul class="thumbnails">
+				  <li class="span3">
+				    <div class="thumbnail">
+				      <%= image_tag @kibera_child.image_url.to_s %>
+				    </div>
+				  </li>
+				</ul>
+			</div>
+		<% end %>
 
-<p>
-  <b>Lastname:</b>
-  <%= @kibera_child.lastName %>
-</p>
+		<div class="span6">
+			<div class="container">
+				<div class="row">
+					<div class="span1">
+					  <b>First Name</b><br>
+					  <%= @kibera_child.first_name %>
+					</div>
 
+					<div class="span1">
+					  <b>Last Name</b><br>
+					  <%= @kibera_child.last_name %>
+					</div>
+				</div>
 
-<%= link_to 'Edit', edit_kibera_child_path(@kibera_child) %> |
-<%= link_to 'Back', kibera_children_path %>
+				<div class="row">
+					<div class="span1">
+						<b>Birthdate</b><br>
+						<%= @kibera_child.birth_date %>
+					</div>
+					<div class="span1">
+						<b>Age</b><br>
+						<%= @kibera_child.age %>
+					</div>
+					<div class="span1">
+						<b>Gender</b><br>
+						<%= @kibera_child.gender %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span9">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#assessment" data-toggle="tab">Assessment</a></li>
+					<li><a href="#physical" data-toggle="tab">Physical</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane active" id="assessment">
+					<div class="row">
+						<div class="span2">
+							<b>Date of Assessment</b><br>
+							<%= @kibera_child.assessment_documentation_date %>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="physical">
+					<p>Howdy, I'm in Section 2.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+	  <div class="span9">
+		<div class="form-actions">
+		  <%= link_to 'Back', kibera_children_path, :class => 'btn'  %>
+		  <%= link_to 'Edit', edit_kibera_child_path(@kibera_child), :class => 'btn' %>
+		  <%= link_to 'Delete', kibera_child_path(@kibera_child), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		</div>
+	  </div>
+	</div>
+
+</div>
+
+<% if false %>
+<%= @kibera_child.orphan %>
+<%= @kibera_child.name_of_parent_or_guardian %>
+<%= @kibera_child.height_in_cm %>
+<%= @kibera_child.weight_in_kg %>
+<%= @kibera_child.uam_in_cm %>
+<%= @kibera_child.assessment_temperature_in_fahrenheit %>
+<%= @kibera_child.blood_pressure_systolic %>
+<%= @kibera_child.blood_pressure_diastolic %>
+<%= @kibera_child.has_hearing_complaints %>
+<%= @kibera_child.vision_right %>
+<%= @kibera_child.vision_left %>
+<%= @kibera_child.has_cavities %>
+<%= @kibera_child.has_teeth_missing %>
+<%= @kibera_child.has_healthy_tongue %>
+<%= @kibera_child.has_red_patches %>
+<%= @kibera_child.has_evidence_of_yeast %>
+<%= @kibera_child.has_big_belly %>
+<%= @kibera_child.has_swollen_feet %>
+<%= @kibera_child.has_thin_arms_or_legs %>
+<%= @kibera_child.has_hair_loss %>
+<%= @kibera_child.has_mouth_sores %>
+<%= @kibera_child.has_scalp_fungus %>
+<%= @kibera_child.has_dry_skin %>
+<%= @kibera_child.has_rashes %>
+<%= @kibera_child.rash_location %>
+<%= @kibera_child.has_had_tb %>
+<%= @kibera_child.tb_date %>
+<%= @kibera_child.has_tb_treatment_completed %>
+<%= @kibera_child.has_had_typhoid %>
+<%= @kibera_child.typhoid_date %>
+<%= @kibera_child.has_had_malaria %>
+<%= @kibera_child.malaria_date %>
+<%= @kibera_child.has_menstruated %>
+<%= @kibera_child.has_received_menstrual_products %>
+<%= @kibera_child.menstrual_products_distribution_date %>
+<%= @kibera_child.has_menstrual_product_access %>
+<%= @kibera_child.has_toothbrush %>
+<%= @kibera_child.has_toothpaste %>
+<%= @kibera_child.has_soap %>
+<%= @kibera_child.hygenall_products_distribution_date %>
+<%= @kibera_child.sleeping_location %>
+<%= @kibera_child.sleeps_with_mosquito_net %>
+<%= @kibera_child.has_bible %>
+<%= @kibera_child.is_christian %>
+<%= @kibera_child.is_attending_church %>
+<%= @kibera_child.church_location %>
+<%= @kibera_child.favorite_color %>
+<%= @kibera_child.meals_eaten_per_day %>
+<%= @kibera_child.has_food_available_at_home %>
+<%= @kibera_child.is_food_prepared_with_charcoal %>
+<%= @kibera_child.has_windows_in_home %>
+<%= @kibera_child.has_school_uniform %>
+<%= @kibera_child.is_school_uniform_in_good_condition %>
+<%= @kibera_child.state_of_school_uniform %>
+<%= @kibera_child.dress_size %>
+<%= @kibera_child.shirt_size %>
+<%= @kibera_child.shorts_size %>
+<%= @kibera_child.has_shoes %>
+<%= @kibera_child.is_shoes_in_good_condition %>
+<%= @kibera_child.shoe_size %>
+<%= @kibera_child.additional_comments %>
+<%= @kibera_child.physical_examination_date %>
+<%= @kibera_child.physical_examination_temperature_in_celsius %>
+<%= @kibera_child.health_notes %>
+<%= @kibera_child.general_appearance %>
+<%= @kibera_child.is_antibiotics_needed %>
+<%= @kibera_child.is_antihistamines_needed %>
+<%= @kibera_child.is_antifungals_needed %>
+<%= @kibera_child.is_vitamins_needed %>
+<%= @kibera_child.is_ear_syringing_needed %>
+<%= @kibera_child.is_deworming_needed %>
+<%= @kibera_child.is_stool_sample_needed %>
+<%= @kibera_child.is_dental_attention_needed %>
+<%= @kibera_child.is_opthamologist_needed %>
+<%= @kibera_child.is_pain_killers_needed %>
+<%= @kibera_child.is_blood_test_needed %>
+<%= @kibera_child.is_washing_needed %>
+<%= @kibera_child.has_umbilical_hernia %>
+<%= @kibera_child.additional_physical_examination_notes %>
+<% end %>
