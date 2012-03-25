@@ -1,33 +1,104 @@
-<% title "Kibera Children" %>
-
-<% if @kibera_children.count > 0 %>
-
-	<%= will_paginate @kibera_children, :class => "pagination1" %>
+<div class="container">
+	<% if KiberaChild.count > 0 %>
+		<div class="row">
+			<div class="span12">
+		    	<div class="child-list-nav">
+					<ul class="nav nav-pills">
+						<li>
+							<%= form_tag kibera_children_path, :method => 'get', :class => 'navbar-form pull-left' do %>
+								<%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => "Search..." %>
+								<%= submit_tag 'Search', :name => nil, :class => 'btn' %>
+							<% end %>
+						</li>
+						<li class="dropdown">
+						    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						          Actions
+						          <b class="caret"></b>
+						    </a>
+						    <ul class="dropdown-menu">
+								<li><%= link_to 'Add New Child', new_kibera_child_path %></li>
+						    </ul>
+						</li>
+					  	<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						          Per Page
+						          <b class="caret"></b>
+						    </a>
+						    <ul class="dropdown-menu">
+								<li><%= link_to '25', kibera_children_path(:per_page => 25) unless session[:per_page].nil? || session[:per_page] == 25 %></li>
+								<li><%= link_to '50', kibera_children_path(:per_page => 50) unless session[:per_page] == 50 %></li>
+								<li><%= link_to '100', kibera_children_path(:per_page => 100) unless session[:per_page] == 100 %></li>
+						    </ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						          By Class
+						          <b class="caret"></b>
+						    </a>
+						    <ul class="dropdown-menu">
+								<li><%= link_to 'All', kibera_children_path(:class_in_school => 'all') if session[:class_in_school] %></li>
+								<li><%= link_to 'Pre-Unit', kibera_children_path(:class_in_school => 'pre') unless session[:class_in_school] && session[:class_in_school].downcase == 'pre' %></li>
+								<li><%= link_to '1st Year', kibera_children_path(:class_in_school => '1') unless session[:class_in_school] && session[:class_in_school] == '1' %></li>
+								<li><%= link_to '2nd Year', kibera_children_path(:class_in_school => '2') unless session[:class_in_school] && session[:class_in_school] == '2' %></li>
+								<li><%= link_to '3rd Year', kibera_children_path(:class_in_school => '3') unless session[:class_in_school] && session[:class_in_school] == '3' %></li>
+								<li><%= link_to '4th Year', kibera_children_path(:class_in_school => '4') unless session[:class_in_school] && session[:class_in_school] == '4' %></li>
+						    </ul>
+					  	</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <% @kibera_children.each do |kibera_child| %>
-	      <tr>
-	        <td><%= link_to kibera_child.first_name + ' ' + kibera_child.last_name, kibera_child_path(kibera_child) %></td>
-	        <td>
-	          <%= link_to content_tag('i', '', :class => 'icon-pencil'), edit_kibera_child_path(kibera_child), :class => 'btn btn-mini', :title => "Edit" %>
-	          <%= link_to content_tag('i', '', :class => 'icon-trash icon-white'), kibera_child_path(kibera_child), :method => :delete, :class => 'btn btn-mini btn-danger delete-confirm', :title => "Delete" %>
-	        </td>
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+		<% if @kibera_children.count > 0 %>
+			<div class="row">
+				<div class="span12 child-list-results">
+					<div class="row">
+						<div class="span3">
+							<%= page_entries_info @kibera_children, :model => 'child' %>
+						</div>
+						<div class="offset5 span4 right-text">
+							<%= will_paginate @kibera_children, :class => "pagination1" %>
+						</div>
+					</div>
+				</div>
+			</div>
 	
-	<p class="children-pagination-info"><%= page_entries_info @kibera_children, :model => 'child' %></p>
+			<div class="row">
+				<div class="offset1 span9">
+					<table class="table table-striped">
+						<thead>
+						    <tr>
+							  <th>Child Name</th>
+						      <th>Actions</th>
+						    </tr>
+						</thead>
+					  <tbody>
+					    <% @kibera_children.each do |kibera_child| %>
+					      <tr>
+					        <td><%= link_to kibera_child.first_name + ' ' + kibera_child.last_name, kibera_child_path(kibera_child) %></td>
+					        <td>
+					          <%= link_to content_tag('i', '', :class => 'icon-pencil'), edit_kibera_child_path(kibera_child), :class => 'btn btn-mini', :title => "Edit" %>
+					          <%= link_to content_tag('i', '', :class => 'icon-trash icon-white'), kibera_child_path(kibera_child), :method => :delete, :class => 'btn btn-mini btn-danger delete-confirm', :title => "Delete" %>
+					        </td>
+					      </tr>
+					    <% end %>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		<% else %>
+			<div class="row">
+				<div class="span12">
+					<p>No children found.</p>
+				</div>
+			</div>
+		<% end %>
 	
-<% else %>
-	<p>There are no children entered at this time.</p>
-<% end %>
-
-<%= link_to 'Add New Child', new_kibera_child_path, :class => 'btn btn-primary' %>
+	<% else %>
+		<div class="row">
+			<div class="span12">
+				<p>There are no children entered at this time. Would you like to <%= link_to 'add a child', new_kibera_child_path %>?</p>
+			</div>
+		</div>
+	<% end %>
+</div>

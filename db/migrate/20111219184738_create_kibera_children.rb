@@ -4,7 +4,7 @@ class CreateKiberaChildren < ActiveRecord::Migration
       t.string :image
       t.string :first_name
       t.string :last_name
-      
+      t.string :class_in_school
       t.date :assessment_documentation_date
       t.date :birth_date
       t.integer :age
@@ -73,7 +73,8 @@ class CreateKiberaChildren < ActiveRecord::Migration
       t.date :physical_examination_date
       t.float :physical_examination_temperature_in_celsius
       t.text :health_notes
-      t.text :general_appearance
+      t.text :observations
+      t.text :recommendations
       t.boolean :is_antibiotics_needed
       t.boolean :is_antihistamines_needed
       t.boolean :is_antifungals_needed

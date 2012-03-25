@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :is_admin, :only => [:new, :index, :create, :destroy]
+  
   def index
     @users = User.all
 
@@ -68,6 +70,14 @@ class UsersController < ApplicationController
         format.json { head :ok }
       end
     end
+  end
+  
+  private
+  
+  def is_admin
+      unless current_user.is_admin
+          redirect_to kibera_children_path
+      end
   end
     
 end

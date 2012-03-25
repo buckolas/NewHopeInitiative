@@ -1,9 +1,18 @@
 class KiberaChildrenController < ApplicationController
   # GET /kibera_children
   # GET /kibera_children.json
+  
   def index
-    @kibera_children = KiberaChild.order("last_name").page(params[:page]).per_page(25)
-
+    if params[:per_page]
+      session[:per_page] = params[:per_page].to_i
+    end
+    
+    if params[:class_in_school]
+      session[:class_in_school] = (params[:class_in_school].downcase == "all") ? nil : params[:class_in_school]
+    end
+    
+    @kibera_children = KiberaChild.find_children(params[:search], session[:class_in_school]).page(params[:page]).per_page(session[:per_page] || 25)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @kibera_children }
@@ -80,4 +89,5 @@ class KiberaChildrenController < ApplicationController
       format.json { head :ok }
     end
   end
+  
 end

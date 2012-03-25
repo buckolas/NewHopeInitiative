@@ -2,7 +2,24 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Kibera Child</legend>
 
-	<%= f.input :image, :label => 'Child Photo', :as => :file %>
+	<% if @kibera_child.image? %>
+		<div class="control-group file optional">
+		    <%= f.label :image_url, 'Child Photo', :class => 'file optional control-label' %>
+			<div class="controls">
+				<ul class="thumbnails">
+					<li class="span1">
+			    		<%= image_tag @kibera_child.image_url, :class => 'thumbnail' %>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<%= f.input :image, :label => false, :as => :file %>
+		<%= f.hidden_field :image_cache %>
+	<% else %>
+		<%= f.input :image, :label => 'Child Photo', :as => :file %>
+		<%= f.hidden_field :image_cache %>
+	<% end %>
+	
     <%= f.input :first_name, :label => "First Name" %>
 	<%= f.input :last_name, :label => "Last Name" %>
 

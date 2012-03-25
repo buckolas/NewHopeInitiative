@@ -9,19 +9,36 @@
 //= require twitter/bootstrap
 //= require_tree .
 
+
 $(document).ready(function() {
 	$("a.delete-confirm").click(function(e) {
 	    e.preventDefault();
 		var deleteHref = this.href;
-	    bootbox.confirm("Are you sure you want to delete this child?", function(result) {
-		    if (result) {
-				$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
-	                .append('<input type="hidden" name="_method" value="delete" />')
-	                .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
-	                .appendTo('body')
-	                .submit();
-		    }
+	    bootbox.confirm("Are you sure you want to delete this child?", "Cancel", "Delete", {
+			'classname': 'btn-danger',
+			'callback': function(result) {
+			    if (result) {
+					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
+		                .append('<input type="hidden" name="_method" value="delete" />')
+		                .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
+		                .appendTo('body')
+		                .submit();
+			    }
+			}
+		}, {
+			'header': 'Delete Confirm',
+			'headerCloseButton': false,
+			'animate': false
 		});
 		return false;
+	});
+	
+	$("#about").click(function(e){
+		e.preventDefault();
+		bootbox.modal("<p>This site was built as an internal resource for the New Hope Initiative. It was built with Ruby on Rails using Twitter's Bootstrap framework.</p>", 
+		"About", 
+		{
+			'animate': false
+		});
 	});
 });

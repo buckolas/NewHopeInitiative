@@ -1,4 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
+
+body { padding-top: 60px; }
+
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
@@ -16,15 +19,15 @@
 // Example:
 // @linkColor: #ff0000;
 
-@navbarBackground: #111;
-@navbarBackgroundHighlight: #434343;
+@navbarBackground: #424242;
+@navbarBackgroundHighlight: #8a8a8a;
 @navbarText: #eee;
 @navbarLinkColor: #eee;
 
 .pagination1 {
   text-align: center;
-  padding: 1em;
   cursor: default; 
+  display:inline-block;
 }
 
 .pagination1 ul {
@@ -63,6 +66,43 @@
     color: black; 
 }
 
-.pagination1 a:hover, .pagination1 a:focus {
+.pagination1 a:hover, 
+.pagination1 a:focus {
       text-decoration: underline; 
+}
+
+.navbar .brand{
+	padding:5px 0 5px 10px;
+	overflow:auto;
+    text-transform:uppercase;
+    font-size:12px;
+    font-family:sans-serif;
+    font-weight:lighter;
+    letter-spacing:8px;
+	display:inline-block;
+}
+
+.accordion{
+	margin-bottom:-10px;
+}
+
+.row{
+	margin-bottom:10px;
+}
+
+.table{
+	margin-bottom:0;
+}
+
+.nav-pills > li > a {
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.thumbnail{
+	min-height:80px;
 }

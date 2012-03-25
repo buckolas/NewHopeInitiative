@@ -4,10 +4,14 @@
 
     <%= f.input :username %>
 	<%= f.input :email %>
-	<%= f.input :firstName, :label => 'First Name' %>
-	<%= f.input :lastName, :label => 'Last Name' %>
+	<%= f.input :first_name, :label => 'First Name' %>
+	<%= f.input :last_name, :label => 'Last Name' %>
 	<%= f.input :password %>
 	<%= f.input :password_confirmation, :label => 'Password Confirmation', :error => false %>
+	
+	<% if current_user.is_admin? && @user.username != current_user.username %>
+		<%= f.input :is_admin, :label => 'Administrator', :as => :boolean %>
+	<% end %>
 	
     <div class="form-actions">
       <%= f.submit 'Save', :class => 'btn btn-primary' %>
