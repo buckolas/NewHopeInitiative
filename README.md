@@ -1,5 +1,5 @@
-[New Hope Initiative Internal (NHI) Tracking Tool](http://newhopeinitiative.org)
-==================================================
+[New Hope Initiative (NHI) - Internal Tracking Tool](http://newhopeinitiative.org)
+====================================================
 
 This application is intended for use by the New Hope Initiative staff members. It was built with the intended benefit for the children that come into the care of the organization by tracking their illnesses, medical history, etc so that the organization monitor each child's needs and meet them accordingly. 
 
@@ -14,7 +14,7 @@ If you want to use the code from this application, clone the repo, `git clone gi
 
 
 Future Work
-----------
+-----------
 
 Since this is an internal-use only tool built in my spare time, I will push out updates when I am able depending on the amount of work involved. Priority communicated to me by NHI staff for each outstanding issue will be used to set the order in which fixes/changes are released. 
 
@@ -32,12 +32,16 @@ Some ideas I have at the moment for upcoming releases (after the initial deploym
 
 
 Dependencies
---------------------
+------------
 
 twitter-bootstrap-rails
+
 authlogic
+
 carrierwave
+
 simple_form
+
 will_paginate
 
 
