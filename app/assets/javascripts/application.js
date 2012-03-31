@@ -32,13 +32,4 @@ $(document).ready(function() {
 		});
 		return false;
 	});
-	
-	$("#about").click(function(e){
-		e.preventDefault();
-		bootbox.modal("<p>This site was built as an internal resource for the New Hope Initiative. It was built with Ruby on Rails using Twitter's Bootstrap framework.</p>", 
-		"About", 
-		{
-			'animate': false
-		});
-	});
 });
