@@ -8,7 +8,7 @@ end
 
 class ExportsController < ApplicationController
   def index
-    @children = KiberaChild.find_children(session[:search], session[:class_in_school])
+    @children = KiberaChild.find_children(session[:search], String.to_grade(session[:grade]))
 
     csv_string = CSV.generate do |csv|
       # header row 
