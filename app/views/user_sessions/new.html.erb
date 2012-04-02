@@ -1,0 +1,28 @@
+<%= simple_form_for @user_session, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+	<div class="row">
+		<div class="span5">
+	    	<legend>Login</legend>
+
+			<%= f.input :email %>
+			<%= f.input :password %>
+	
+			</div>
+			<div class="span4">
+				<h3>Welcome New Hope Staff</h3>
+				<p>This website is intended for internal-use to assist with administrative tasks. To request an account, please notify the administrator of this site by contacting a member of the NHI Board of Directors.</p>
+				<p>If you already have access, you may login here. Please do not distribute your username/password to others so that they may access the content of this site.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span9">
+		   		<div class="form-actions">
+			      <%= f.submit 'Login', :class => 'btn btn-primary' %>
+			    </div>
+			</div>
+		</div>
+  </fieldset>
+<% end %>
+
+	

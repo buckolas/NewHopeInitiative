@@ -1,0 +1,728 @@
+<div class="container">
+	<div class="row">
+		<div class="span8">
+			<h2 class="centered-text"><%= @kibera_child.first_name %> <%= @kibera_child.last_name %></h2>
+		</div>
+	</div>
+	
+	<div class="row">
+		
+		<div class="span2">
+			<ul class="thumbnails">
+			  <li class="span2">
+			    <div class="thumbnail">
+			     	<%= image_tag @kibera_child.image_url if @kibera_child.image? %>
+					<%= content_tag :h4, "Photo not available." unless @kibera_child.image? %>
+			    </div>
+			  </li>
+			</ul>
+		</div>
+
+		<div class="span6">
+			<div class="row">
+				<div class="span2">
+					<b>Birthdate</b><br>
+					<%= @kibera_child.birth_date || 'Unknown' %>
+				</div>
+				<div class="span2">
+					<b>Age</b><br>
+					<%= age @kibera_child %>
+				</div>
+				<div class="span2">
+					<b>Class</b><br>
+					<%= @kibera_child.grade || 'Unknown' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2">
+					<b>Gender</b><br>
+					<%= @kibera_child.gender || 'Unknown' %>
+				</div>
+				<div class="span2">
+					<b>Orphan</b><br/>
+					<%= @kibera_child.orphan || 'Unknown' %>
+				</div>
+				<div class="span2">
+					<b>Parent or Guardian</b><br/>
+					<%= @kibera_child.name_of_parent_or_guardian || 'Unknown' %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span9">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#assessment" data-toggle="tab">Assessment</a></li>
+					<li><a href="#physical" data-toggle="tab">Physical</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane active" id="assessment">
+						<div class="row">
+							<div class="span6">
+								<b>Date of Assessment: </b>
+								<%= l @kibera_child.assessment_documentation_date if @kibera_child.assessment_documentation_date? %>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="physical-screening">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#physical-screening" href="#collapse-physical-screening">
+					                            Physical Screening
+					                        </a>
+					                    </div>
+					                    <div id="collapse-physical-screening" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<h3>Weight</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Kilograms</b><br/>
+															<%= @kibera_child.weight_in_kg || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>Pounds</b><br/>
+															<%= @kibera_child.weight_in_kg ? @kibera_child.weight_in_kg * 2.2 : 'Unknown' %>
+														</div>
+													</div>
+													<h3>Height</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Centimeters</b><br/>
+															<%= @kibera_child.height_in_cm || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>Inches</b><br/>
+															<%= @kibera_child.height_in_cm ? @kibera_child.height_in_cm * 0.39 : 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Feet</b><br/>
+															<%= @kibera_child.height_in_cm ? ((@kibera_child.height_in_cm * 0.39/12).floor.to_s + '\' ' + (@kibera_child.height_in_cm * 0.39 % 12).floor.to_s + '"') : 'Unknown' %>
+														</div>
+													</div>
+													<h3>UAM</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Centimeters</b><br/>
+															<%= @kibera_child.uam_in_cm || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>Inches</b><br/>
+															<%= @kibera_child.uam_in_cm ? @kibera_child.uam_in_cm * 0.39 : 'Unknown' %>
+														</div>
+													</div>
+													<h3>Vision</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Right Eye</b><br/>
+															20/<%= @kibera_child.vision_right || 'XX' %>
+														</div>
+														<div class="span3">
+															<b>Left Eye</b><br/>
+															20/<%= @kibera_child.vision_left || 'XX' %>
+														</div>
+													</div>
+													<h3>Temperature</h3>
+													<div class="row">
+														<div class="span3">
+															<b>&deg;F</b><br/>
+															<%= @kibera_child.assessment_temperature_in_fahrenheit || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>&deg;C</b><br/>
+															<%= @kibera_child.assessment_temperature_in_fahrenheit? ? ((@kibera_child.assessment_temperature_in_fahrenheit - 32) * 5/9) : 'Unknown' %>
+														</div>
+													</div>
+													<h3>Vitals</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Blood Pressure</b><br/>
+															<%= @kibera_child.blood_pressure_systolic || 'XX' %>/<%= @kibera_child.blood_pressure_diastolic || 'XX' %>
+														</div>
+													</div>
+													<h3>Hearing</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Hearing Complaints?</b><br/>
+															<%= @kibera_child.has_hearing_complaints || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Teeth</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Visual Cavities?</b><br/>
+															<%= @kibera_child.has_cavities || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>Teeth Missing?</b><br/>
+															<%= @kibera_child.has_teeth_missing || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Tongue</h3>
+													<div class="row">
+														<div class="span3">
+															<b>Healthy/Pink Tongue?</b><br/>
+															<%= @kibera_child.has_healthy_tongue || 'Unknown' %>
+														</div>
+														<div class="span3">
+															<b>Red/Patchy Tongue?</b><br/>
+															<%= @kibera_child.has_red_patches || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Evidence of Yeast?</b><br/>
+															<%= @kibera_child.has_evidence_of_yeast || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="malnutrition-signs">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#malnutrition-signs" href="#collapse-malnutrition-signs">
+					                            Signs of Malnutrition
+					                        </a>
+					                    </div>
+					                    <div id="collapse-malnutrition-signs" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<h3>Body</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Big Belly?</b><br/>
+															<%= @kibera_child.has_big_belly || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Swollen Feet?</b><br/>
+															<%= @kibera_child.has_swollen_feet || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Thin Arms/Legs?</b><br/>
+															<%= @kibera_child.has_thin_arms_or_legs || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Mouth Sores?</b><br/>
+															<%= @kibera_child.has_mouth_sores || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Scalp</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Hair Loss?</b><br/>
+															<%= @kibera_child.has_hair_loss || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Signs of Fungus?</b><br/>
+															<%= @kibera_child.has_scalp_fungus || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Skin</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Dry Skin?</b><br/>
+															<%= @kibera_child.has_dry_skin || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Rashes?</b><br/>
+															<%= @kibera_child.has_rashes || 'Unknown' %>
+														</div>
+														<div class="span4">
+															<b>Location</b><br/>
+															<%= @kibera_child.rash_location || 'Unknown' %>
+														</div>
+													</div>
+											</div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="disease-history">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#disease-history" href="#collapse-disease-history">
+					                            Infectious Disease History
+					                        </a>
+					                    </div>
+					                    <div id="collapse-disease-history" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<h3>Tuberculosis</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Had TB?</b><br/>
+															<%= @kibera_child.has_had_tb || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Date</b><br/>
+															<%= @kibera_child.tb_date || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Treatment Completed?</b><br/>
+															<%= @kibera_child.has_tb_treatment_completed || 'N/A' %>
+														</div>
+													</div>
+													<h3>Typhoid</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Had Typhoid?</b><br/>
+															<%= @kibera_child.has_had_typhoid || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Date</b><br/>
+															<%= @kibera_child.typhoid_date || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Malaria</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Had Malaria?</b><br/>
+															<%= @kibera_child.has_had_malaria || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Date</b><br/>
+															<%= @kibera_child.malaria_date || 'Unknown' %>
+														</div>
+													</div>
+											</div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="personal-hygiene">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#personal-hygiene" href="#collapse-personal-hygiene">
+					                            Personal Hygiene
+					                        </a>
+					                    </div>
+					                    <div id="collapse-personal-hygiene" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<div class="row">
+														<div class="span2">
+															<b>Has Toothbrush?</b><br/>
+															<%= @kibera_child.has_toothbrush || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Has Toothpaste?</b><br/>
+															<%= @kibera_child.has_toothpaste || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Has Soap?</b><br/>
+															<%= @kibera_child.has_soap || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Date Given</b><br/>
+															<%= @kibera_child.hygenall_products_distribution_date || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+					
+						<% if @kibera_child.gender && (@kibera_child.gender.casecmp("F") == 0 || @kibera_child.gender.casecmp("FEMALE") == 0) %>
+							<div class="row">
+								<div class="span9">
+									<div class="accordion" id="female-hygiene">
+						                <div class="accordion-group">
+						                    <div class="accordion-heading">
+						                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#female-hygiene" href="#collapse-female-hygiene">
+						                            Feminine Hygiene
+						                        </a>
+						                    </div>
+						                    <div id="collapse-female-hygiene" class="accordion-body collapse">
+						                        <div class="accordion-inner">
+														<div class="row">
+															<div class="span2">
+																<b>Has Menstruated?</b><br/>
+																<%= @kibera_child.has_menstruated || 'Unknown' %>
+															</div>
+															<div class="span2">
+																<b>Has Menstrual Products?</b><br/>
+																<%= @kibera_child.has_received_menstrual_products || 'Unknown' %>
+															</div>
+															<div class="span2">
+																<b>Date Given</b><br/>
+																<%= @kibera_child.menstrual_products_distribution_date || 'Unknown' %>
+															</div>
+															<div class="span2">
+																<b>Has Access to Menstrual Products?</b><br/>
+																<%= @kibera_child.has_menstrual_product_access || 'Unknown' %>
+															</div>
+														</div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+								</div>
+			            	</div>
+						<% end %>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="living-conditions">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#living-conditions" href="#collapse-living-conditions">
+					                            Living Conditions
+					                        </a>
+					                    </div>
+					                    <div id="collapse-living-conditions" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<h3>Sleeping Arrangements</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Sleeping Location</b><br/>
+															<%= @kibera_child.sleeping_location || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Sleeps Under Mosquito Net?</b><br/>
+															<%= @kibera_child.sleeps_with_mosquito_net || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Windows in Home?</b><br/>
+															<%= @kibera_child.has_windows_in_home || 'Unknown' %>
+														</div>
+													</div>
+													<h3>Food</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Meals Per Day</b><br/>
+															<%= @kibera_child.meals_eaten_per_day || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Food Available at Home?</b><br/>
+															<%= @kibera_child.has_food_available_at_home || 'Unknown' %>
+														</div>
+														<div class="span4">
+															<b>Food Prepared With Charcoal?</b><br/>
+															<%= @kibera_child.is_food_prepared_with_charcoal || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+		
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="faith">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#faith" href="#collapse-faith">
+					                            Faith
+					                        </a>
+					                    </div>
+					                    <div id="collapse-faith" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<div class="row">
+														<div class="span2">
+															<b>Has Bible?</b><br/>
+															<%= @kibera_child.has_bible || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Accepted Jesus?</b><br/>
+															<%= @kibera_child.is_christian || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Attends Church?</b><br/>
+															<%= @kibera_child.is_attending_church || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Church Location</b><br/>
+															<%= @kibera_child.church_location || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+		
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="clothing">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#clothing" href="#collapse-clothing">
+					                            Clothing Conditions &amp; Measurements
+					                        </a>
+					                    </div>
+					                    <div id="collapse-clothing" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<h3>School Uniform</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Has School Uniform?</b><br/>
+															<%= @kibera_child.has_school_uniform || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Good Condition?</b><br/>
+															<%= @kibera_child.is_school_uniform_in_good_condition || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Uniform Condition</b><br/>
+															<%= @kibera_child.state_of_school_uniform || 'N/A' %>
+														</div>
+													</div>
+													<% if @kibera_child.gender && (@kibera_child.gender.casecmp("F") == 0 || @kibera_child.gender.casecmp("FEMALE") == 0) %>
+													<h3>Size(s)</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Dress Size</b><br/>
+															<%= @kibera_child.dress_size || 'Unknown' %>
+														</div>
+													</div>
+													<% elsif @kibera_child.gender && (@kibera_child.gender.casecmp("M") == 0 || @kibera_child.gender.casecmp("MALE") == 0) %>
+													<h3>Size(s)</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Shirt Size</b><br/>
+															<%= @kibera_child.shirt_size || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Shorts Size</b><br/>
+															<%= @kibera_child.shorts_size || 'Unknown' %>
+														</div>
+													</div>
+													<% end %>
+													<h3>Shoes</h3>
+													<div class="row">
+														<div class="span2">
+															<b>Shoe Size?</b><br/>
+															<%= @kibera_child.shoe_size || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Has Shoes?</b><br/>
+															<%= @kibera_child.has_shoes || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Good Condition?</b><br/>
+															<%= @kibera_child.is_shoes_in_good_condition || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+		
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="misc">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#misc" href="#collapse-misc">
+					                            Miscellaneous Info
+					                        </a>
+					                    </div>
+					                    <div id="collapse-misc" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<div class="row">
+														<div class="span2">
+															<b>Favorite Color</b><br/>
+															<%= @kibera_child.favorite_color || 'Unknown' %>
+														</div>
+														<div class="span4">
+															<b>Additional Comments</b><br/>
+															<%= @kibera_child.additional_comments || 'N/A' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+			
+				</div>
+				<div class="tab-pane" id="physical">
+						<div class="row">
+							<div class="span6">
+								<b>Physical Examination Date: </b>
+								<%= l @kibera_child.physical_examination_date if @kibera_child.physical_examination_date? %>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="vitals">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#vitals" href="#collapse-vitals">
+					                            Vitals
+					                        </a>
+					                    </div>
+					                    <div id="collapse-vitals" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+												<h3>Temperature</h3>
+												<div class="row">
+													<div class="span3">
+														<b>&deg;F</b><br/>
+														<%= @kibera_child.physical_examination_temperature_in_celsius? ? ((@kibera_child.physical_examination_temperature_in_celsius * 9 / 5) + 32) : 'Unknown' %>
+													</div>
+													<div class="span3">
+														<b>&deg;C</b><br/>
+														<%= @kibera_child.physical_examination_temperature_in_celsius || 'Unknown' %>
+													</div>
+												</div>
+					                        </div>
+					                    </div>
+					                </div>
+								</div>
+							</div>
+		            	</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="health-needs">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#health-needs" href="#collapse-health-needs">
+					                            Doctor's Recommendations
+					                        </a>
+					                    </div>
+					                    <div id="collapse-health-needs" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<div class="row">
+														<div class="span2">
+															<b>Antibiotics Needed?</b><br/>
+															<%= @kibera_child.is_antibiotics_needed || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Antihistamines Needed?</b><br/>
+															<%= @kibera_child.is_antihistamines_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Antifungals Needed?</b><br/>
+															<%= @kibera_child.is_antifungals_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Vitamins Needed?</b><br/>
+															<%= @kibera_child.is_vitamins_needed || 'Unknown'  %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span2">
+															<b>Ear Syringing Needed?</b><br/>
+															<%= @kibera_child.is_ear_syringing_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Deworming Needed?</b><br/>
+															<%= @kibera_child.is_deworming_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Stool Sample Needed?</b><br/>
+															<%= @kibera_child.is_stool_sample_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Dental Attention Needed?</b><br/>
+															<%= @kibera_child.is_dental_attention_needed || 'Unknown'  %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span2">
+															<b>Opthamologist Attention Needed?</b><br/>
+															<%= @kibera_child.is_opthamologist_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Pain Killers Needed?</b><br/>
+												        	<%= @kibera_child.is_pain_killers_needed || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Blood Test Needed?</b><br/>
+												        	<%= @kibera_child.is_blood_test_needed || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Needs Washing?</b><br/>
+												        	<%= @kibera_child.is_washing_needed || 'Unknown' %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span2">
+															<b>Has Umbilical Hernia?</b><br/>
+												        	<%= @kibera_child.has_umbilical_hernia || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+								</div>
+							</div>
+		            	</div>
+					
+						<div class="row">
+							<div class="span9">
+								<div class="accordion" id="doctor-notes">
+					                <div class="accordion-group">
+					                    <div class="accordion-heading">
+					                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#doctor-notes" href="#collapse-doctor-notes">
+					                            Doctor's Notes
+					                        </a>
+					                    </div>
+					                    <div id="collapse-doctor-notes" class="accordion-body collapse">
+					                        <div class="accordion-inner">
+													<div class="row">
+														<div class="span2">
+															<b>Signs of Poor Health</b><br/>
+															<%= @kibera_child.observations || 'None'  %>
+														</div>
+														<div class="span3">
+															<b>Comments</b><br/>
+															<%= @kibera_child.health_notes || 'None'  %>
+														</div>
+														<div class="span3">
+															<b>Recommendations</b><br/>
+															<%= @kibera_child.recommendations || 'None'  %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span3">
+															<b>Other</b><br/>
+												        	<%= @kibera_child.additional_physical_examination_notes || 'Unknown' %>
+														</div>
+													</div>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+							</div>
+		            	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+	  <div class="span9">
+		<div class="form-actions">
+		  <%= link_to 'Back', kibera_children_path, :class => 'btn'  %>
+		  <%= link_to 'Edit', edit_kibera_child_path(@kibera_child), :class => 'btn' %>
+		  <%= link_to 'Delete', kibera_child_path(@kibera_child), :method => 'delete', :class => 'btn btn-danger delete-confirm' %>
+		</div>
+	  </div>
+	</div>
+
+</div>

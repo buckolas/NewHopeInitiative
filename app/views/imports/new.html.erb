@@ -1,0 +1,15 @@
+<%= form_tag({:action => :create}, :multipart => true, :class => 'form-horizontal simple_form' ) do %>
+  <fieldset>
+    <legend>Import Children From CSV File</legend>
+	<div class="control-group file required">
+	    <%= label_tag 'csvFile', 'CSV File', :class => 'file required control-label' %>
+		<div class="controls">
+	    	<%= file_field_tag 'csvFile', :class => 'file required' %>
+		</div>
+	</div>
+	<div class="form-actions">
+		<%= submit_tag 'Begin Import', :class => 'btn btn-primary' %>
+		<%= link_to 'Cancel', kibera_children_path, :class => 'btn' %>
+	</div>
+  </fieldset>
+<% end %>
