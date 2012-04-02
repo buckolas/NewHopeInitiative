@@ -139,6 +139,15 @@ form .thumbnails > li{
 	min-height:400px;
 }
 
+.export-action img{
+	height:30px;
+	float:left;
+}
+
+.export-action span{
+	line-height:30px;
+}
+
 #footer{
 	margin-top: 45px;
 	padding: 15px 0 35px;

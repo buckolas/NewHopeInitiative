@@ -26,11 +26,11 @@
 				</div>
 				<div class="span2">
 					<b>Age</b><br>
-					<%= @kibera_child.age %>
+					<%= age @kibera_child %>
 				</div>
 				<div class="span2">
 					<b>Class</b><br>
-					<%= @kibera_child.class_in_school || 'Unknown' %>
+					<%= @kibera_child.grade || 'Unknown' %>
 				</div>
 			</div>
 			<div class="row">
@@ -643,9 +643,27 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="span4">
+														<div class="span2">
 															<b>Opthamologist Attention Needed?</b><br/>
 															<%= @kibera_child.is_opthamologist_needed || 'Unknown'  %>
+														</div>
+														<div class="span2">
+															<b>Pain Killers Needed?</b><br/>
+												        	<%= @kibera_child.is_pain_killers_needed || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Blood Test Needed?</b><br/>
+												        	<%= @kibera_child.is_blood_test_needed || 'Unknown' %>
+														</div>
+														<div class="span2">
+															<b>Needs Washing?</b><br/>
+												        	<%= @kibera_child.is_washing_needed || 'Unknown' %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span2">
+															<b>Has Umbilical Hernia?</b><br/>
+												        	<%= @kibera_child.has_umbilical_hernia || 'Unknown' %>
 														</div>
 													</div>
 					                        </div>
@@ -668,16 +686,22 @@
 					                        <div class="accordion-inner">
 													<div class="row">
 														<div class="span2">
-															<b>Observations</b><br/>
+															<b>Signs of Poor Health</b><br/>
 															<%= @kibera_child.observations || 'None'  %>
 														</div>
 														<div class="span3">
-															<b>Notes</b><br/>
+															<b>Comments</b><br/>
 															<%= @kibera_child.health_notes || 'None'  %>
 														</div>
 														<div class="span3">
 															<b>Recommendations</b><br/>
 															<%= @kibera_child.recommendations || 'None'  %>
+														</div>
+													</div>
+													<div class="row">
+														<div class="span3">
+															<b>Other</b><br/>
+												        	<%= @kibera_child.additional_physical_examination_notes || 'Unknown' %>
 														</div>
 													</div>
 					                        </div>
@@ -696,7 +720,7 @@
 		<div class="form-actions">
 		  <%= link_to 'Back', kibera_children_path, :class => 'btn'  %>
 		  <%= link_to 'Edit', edit_kibera_child_path(@kibera_child), :class => 'btn' %>
-		  <%= link_to 'Delete', kibera_child_path(@kibera_child), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		  <%= link_to 'Delete', kibera_child_path(@kibera_child), :method => 'delete', :class => 'btn btn-danger delete-confirm' %>
 		</div>
 	  </div>
 	</div>

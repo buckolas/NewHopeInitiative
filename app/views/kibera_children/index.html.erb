@@ -6,7 +6,7 @@
 					<ul class="nav nav-pills">
 						<li>
 							<%= form_tag kibera_children_path, :method => 'get', :class => 'navbar-form pull-left' do %>
-								<%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => "Search..." %>
+								<%= text_field_tag :search, session[:search], :class => 'search-query', :placeholder => "Search..." %>
 								<%= submit_tag 'Search', :name => nil, :class => 'btn' %>
 							<% end %>
 						</li>
@@ -17,6 +17,12 @@
 						    </a>
 						    <ul class="dropdown-menu">
 								<li><%= link_to 'Add New Child', new_kibera_child_path %></li>
+								<li class="divider"></li>
+								<li>
+									<%= link_to exports_path, :class => 'export-action' do %>
+										<%= image_tag("excel.png", :border => 0) %><span>Export to Excel</span>
+									<% end %>
+								</li>
 						    </ul>
 						</li>
 					  	<li class="dropdown">
@@ -36,12 +42,12 @@
 						          <b class="caret"></b>
 						    </a>
 						    <ul class="dropdown-menu">
-								<li><%= link_to 'All', kibera_children_path(:class_in_school => 'all') if session[:class_in_school] %></li>
-								<li><%= link_to 'Pre-Unit', kibera_children_path(:class_in_school => 'pre') unless session[:class_in_school] && session[:class_in_school].downcase == 'pre' %></li>
-								<li><%= link_to '1st Year', kibera_children_path(:class_in_school => '1') unless session[:class_in_school] && session[:class_in_school] == '1' %></li>
-								<li><%= link_to '2nd Year', kibera_children_path(:class_in_school => '2') unless session[:class_in_school] && session[:class_in_school] == '2' %></li>
-								<li><%= link_to '3rd Year', kibera_children_path(:class_in_school => '3') unless session[:class_in_school] && session[:class_in_school] == '3' %></li>
-								<li><%= link_to '4th Year', kibera_children_path(:class_in_school => '4') unless session[:class_in_school] && session[:class_in_school] == '4' %></li>
+								<li><%= link_to 'All', kibera_children_path(:grade => 'all') if session[:grade] %></li>
+								<li><%= link_to 'Pre-Unit', kibera_children_path(:grade => 'pre') unless session[:grade] && session[:grade].downcase == 'pre' %></li>
+								<li><%= link_to '1st Year', kibera_children_path(:grade => '1') unless session[:grade] && session[:grade] == '1' %></li>
+								<li><%= link_to '2nd Year', kibera_children_path(:grade => '2') unless session[:grade] && session[:grade] == '2' %></li>
+								<li><%= link_to '3rd Year', kibera_children_path(:grade => '3') unless session[:grade] && session[:grade] == '3' %></li>
+								<li><%= link_to '4th Year', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '4' %></li>
 						    </ul>
 					  	</li>
 					</ul>

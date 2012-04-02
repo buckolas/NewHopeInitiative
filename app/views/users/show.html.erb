@@ -1,11 +1,6 @@
 <% title 'User Info' %>
 
 <p>
-  <b>Username</b><br>
-  <%= @user.username %>
-</p>
-
-<p>
   <b>Email</b><br>
   <%= @user.email %>
 </p>
@@ -23,5 +18,5 @@
 <div class="form-actions">
   <%= link_to 'Back', users_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
-  <%= link_to 'Delete', user_path(@user), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <%= link_to 'Delete', user_path(@user), :method => 'delete', :class => 'btn btn-danger delete-confirm' %>
 </div>

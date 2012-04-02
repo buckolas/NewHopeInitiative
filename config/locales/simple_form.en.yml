@@ -20,5 +20,9 @@ en:
     #       email: 'E-mail.'
     # hints:
     #   username: 'User name to sign in.'
-    #   password: 'No special characters, please.'
-
+    #   password: '
+    options:
+      kibera_child:
+        gender:
+          male: 'Male'
+          female: "Female'

@@ -4,10 +4,9 @@ class CreateKiberaChildren < ActiveRecord::Migration
       t.string :image
       t.string :first_name
       t.string :last_name
-      t.string :class_in_school
+      t.string :grade
       t.date :assessment_documentation_date
       t.date :birth_date
-      t.integer :age
       t.string :gender
       t.string :orphan
       t.string :name_of_parent_or_guardian

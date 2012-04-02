@@ -2,14 +2,13 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> User</legend>
 
-    <%= f.input :username %>
 	<%= f.input :email %>
 	<%= f.input :first_name, :label => 'First Name' %>
 	<%= f.input :last_name, :label => 'Last Name' %>
 	<%= f.input :password %>
 	<%= f.input :password_confirmation, :label => 'Password Confirmation', :error => false %>
 	
-	<% if current_user.is_admin? && @user.username != current_user.username %>
+	<% if current_user.is_admin? && @user.email != current_user.email %>
 		<%= f.input :is_admin, :label => 'Administrator', :as => :boolean %>
 	<% end %>
 	

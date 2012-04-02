@@ -41,3 +41,5 @@ gem "mocha", :group => :test
 gem "carrierwave"
 gem 'simple_form'
 gem 'will_paginate', '> 3.0'
+gem 'fastercsv'
+gem 'chronic'

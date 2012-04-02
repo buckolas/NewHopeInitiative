@@ -16,10 +16,9 @@ ActiveRecord::Schema.define(:version => 20120107213755) do
     t.string   "image"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "class_in_school"
+    t.string   "grade"
     t.date     "assessment_documentation_date"
     t.date     "birth_date"
-    t.integer  "age"
     t.string   "gender"
     t.string   "orphan"
     t.string   "name_of_parent_or_guardian"
@@ -113,7 +112,6 @@ ActiveRecord::Schema.define(:version => 20120107213755) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"

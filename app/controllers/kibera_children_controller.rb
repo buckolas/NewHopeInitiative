@@ -7,11 +7,17 @@ class KiberaChildrenController < ApplicationController
       session[:per_page] = params[:per_page].to_i
     end
     
-    if params[:class_in_school]
-      session[:class_in_school] = (params[:class_in_school].downcase == "all") ? nil : params[:class_in_school]
+    if params[:grade]
+      session[:grade] = (params[:grade].downcase == "all") ? nil : params[:grade]
     end
     
-    @kibera_children = KiberaChild.find_children(params[:search], session[:class_in_school]).page(params[:page]).per_page(session[:per_page] || 25)
+    if params[:search]
+      session[:search] = params[:search]
+    elsif params[:grade].nil? && params[:per_page].nil?
+      session[:search] = nil
+    end
+    
+    @kibera_children = KiberaChild.find_children(session[:search], session[:grade]).page(params[:page]).per_page(session[:per_page] || 25)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -50,7 +56,8 @@ class KiberaChildrenController < ApplicationController
   # POST /kibera_children.json
   def create
     @kibera_child = KiberaChild.new(params[:kibera_child])
-
+    @kibera_child.first_name.strip!
+    @kibera_child.last_name.strip!
     respond_to do |format|
       if @kibera_child.save
         format.html { redirect_to @kibera_child, :notice => 'Kibera child was successfully created.' }

@@ -1,24 +1,31 @@
-<h1>New Hope Users</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Username</th>
-	  <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.username, user_path(user) %></td>
-		<td><%= link_to user.first_name + ' ' + user.last_name, user_path(user) %></td>
-        <td>
-			<%= link_to content_tag('i', '', :class => 'icon-pencil'), edit_user_path(user), :class => 'btn btn-mini', :title => "Edit" %>
-	        <%= link_to content_tag('i', '', :class => 'icon-trash icon-white'), user_path(user), :method => :delete, :class => 'btn btn-mini btn-danger delete-confirm', :title => "Delete" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'New User', new_user_path, :class => 'btn btn-primary' %>
+<div class="row">
+	<div class="	span9">
+		<h1>New Hope Users</h1>
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Name</th>
+			  <th>Email</th>
+		      <th>Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% @users.each do |user| %>
+		      <tr>
+				<td><%= link_to user.first_name + ' ' + user.last_name, user_path(user) %></td>
+				<td><%= link_to user.email, user_path(user) %></td>
+		        <td>
+					<%= link_to content_tag('i', '', :class => 'icon-pencil'), edit_user_path(user), :class => 'btn btn-mini', :title => "Edit" %>
+			        <%= link_to content_tag('i', '', :class => 'icon-trash icon-white'), user_path(user), :method => :delete, :class => 'btn btn-mini btn-danger delete-confirm', :title => "Delete" %>
+		        </td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="span9">
+		<%= link_to 'New User', new_user_path, :class => 'btn btn-primary' %>
+	</div>
+</div>
