@@ -21,15 +21,21 @@ class String
     grade_out = 'Pre-Unit'
     if grade
       if grade.include?('1')
-        grade_out = '1st Grade'
+        grade_out = 'Class 1'
       elsif grade.include?('2')
-        grade_out = '2nd Grade'
+        grade_out = 'Class 2'
       elsif grade.include?('3')
-        grade_out = '3rd Grade'
+        grade_out = 'Class 3'
       elsif grade.include?('4')
-        grade_out = '4th Grade'
+        grade_out = 'Class 4'
       elsif grade.include?('5')
-        grade_out = '5th Grade'
+        grade_out = 'Class 5'
+      elsif grade.include?('6')
+        grade_out = 'Class 6'
+      elsif grade.include?('7')
+        grade_out = 'Class 7'
+      elsif grade.include?('8')
+        grade_out = 'Class 8'
       end
     end
     grade_out

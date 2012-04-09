@@ -1,13 +1,47 @@
+# require 'aws/s3'
+require 'rubygems'
+require 'fog'
+
 class KiberaChild < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :gender, :grade, :birth_date
   validate :child_name_is_unique
-  mount_uploader :image, ImageUploader
   
   def self.find_children(search, grade)
     children = KiberaChild.order("last_name ASC, first_name ASC")
     children = children.where("last_name LIKE ? OR first_name LIKE ?", "%" + search + "%", "%" + search + "%") if search
     children = children.where("grade = ?", String.to_grade(grade)) if grade
     children
+  end
+  
+  def age
+    now = Date.today
+    age = now.year - birth_date.year
+    age -= 1 if (birth_date.month > now.month || (birth_date.month >= now.month && birth_date.day > now.day))
+    age
+  end
+  
+  def photos
+    #s3 = AWS::S3.new
+    #bucket = s3.buckets[AWS_CONFIG['s3_bucket']]
+    #photos = bucket.objects['img']
+    #.url_for(:read)
+    # photos = AWS::S3::Bucket.objects(AWS_CONFIG['s3_bucket'], :prefix => 'img/' + first_name + ' ' + last_name)
+    # photos
+    
+    # create a connection
+    connection = Fog::Storage.new({
+      :provider                 => 'AWS',
+      :aws_access_key_id        => AWS_CONFIG['access_key_id'],
+      :aws_secret_access_key    => AWS_CONFIG['secret_access_key']
+    })
+
+    # the S3 bucket
+    directory = connection.directories.get(AWS_CONFIG['s3_bucket'])
+
+    # all child images
+    photos = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+    photos
+    
   end
   
   private 

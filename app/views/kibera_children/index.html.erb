@@ -44,10 +44,14 @@
 						    <ul class="dropdown-menu">
 								<li><%= link_to 'All', kibera_children_path(:grade => 'all') if session[:grade] %></li>
 								<li><%= link_to 'Pre-Unit', kibera_children_path(:grade => 'pre') unless session[:grade] && session[:grade].downcase == 'pre' %></li>
-								<li><%= link_to '1st Year', kibera_children_path(:grade => '1') unless session[:grade] && session[:grade] == '1' %></li>
-								<li><%= link_to '2nd Year', kibera_children_path(:grade => '2') unless session[:grade] && session[:grade] == '2' %></li>
-								<li><%= link_to '3rd Year', kibera_children_path(:grade => '3') unless session[:grade] && session[:grade] == '3' %></li>
-								<li><%= link_to '4th Year', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '4' %></li>
+								<li><%= link_to 'Class 1', kibera_children_path(:grade => '1') unless session[:grade] && session[:grade] == '1' %></li>
+								<li><%= link_to 'Class 2', kibera_children_path(:grade => '2') unless session[:grade] && session[:grade] == '2' %></li>
+								<li><%= link_to 'Class 3', kibera_children_path(:grade => '3') unless session[:grade] && session[:grade] == '3' %></li>
+								<li><%= link_to 'Class 4', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '4' %></li>
+								<li><%= link_to 'Class 5', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '5' %></li>
+								<li><%= link_to 'Class 6', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '6' %></li>
+								<li><%= link_to 'Class 7', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '7' %></li>
+								<li><%= link_to 'Class 8', kibera_children_path(:grade => '4') unless session[:grade] && session[:grade] == '8' %></li>
 						    </ul>
 					  	</li>
 					</ul>

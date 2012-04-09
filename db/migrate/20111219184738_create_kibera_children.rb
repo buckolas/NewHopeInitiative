@@ -1,7 +1,6 @@
 class CreateKiberaChildren < ActiveRecord::Migration
   def change
     create_table :kibera_children do |t|
-      t.string :image
       t.string :first_name
       t.string :last_name
       t.string :grade

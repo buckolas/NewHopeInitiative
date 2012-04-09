@@ -1,166 +1,476 @@
 <div class="row">
-	<div class="span12">
-		<h1><%= controller.action_name.capitalize %> Kibera Child</h1>
-		<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
-			<div class="tabbable">
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
-					<li><a href="#assessment" data-toggle="tab">Assessment Info</a></li>
-					<li><a href="#physical" data-toggle="tab">Physical Exam</a></li>
-				</ul>
-			</div>
-			<div class="tab-content">
-				<div class="tab-pane active" id="general">
-				    <fieldset>
-						<div class="row">
-							<div class="span12">
-						        <% if @kibera_child.image? %>
-						            <div class="control-group file optional">
-						                <%= f.label :image_url, 'Child Photo', :class => 'file optional control-label' %>
-						                <div class="controls">
-						                    <ul class="thumbnails">
-						                        <li class="span1">
-						                            <%= image_tag f.input :image_url, :class => 'thumbnail' %>
-						                        </li>
-						                    </ul>
-						                </div>
-						            </div>
-						            <%= f.input :image, :label => false, :as => :file %>
-						            <%= f.hidden_field :image_cache %>
-						        <% else %>
-						            <%= f.input :image, :label => 'Child Photo', :as => :file %>
-						            <%= f.hidden_field :image_cache %>
-						        <% end %>
-							</div>
-						</div>
+<div class="span12">
+<h1><%= controller.action_name.capitalize %> Kibera Child</h1>
+<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="tabbable">
+<ul class="nav nav-tabs">
+<li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
+<li><a href="#assessment" data-toggle="tab">Assessment Info</a></li>
+<li><a href="#physical" data-toggle="tab">Physical Exam</a></li>
+</ul>
+</div>
+<div class="tab-content">
+<div class="tab-pane active" id="general">
+  <fieldset>
         
-						<div class="row">
-							<div class="span4">
-					        	<%= f.input :first_name, :label => "First Name" %>
-							</div>
-							<div class="span4">
-					        	<%= f.input :last_name, :error => false, :label => "Last Name" %>
-							</div>
-							<div class="span3">
-				        		<%= f.input :gender, :as => :radio_buttons, :collection => ["Male", "Female"] %>
-							</div>
-						</div>
-        				
-						<div class="row">
-							<div class="span4">
-        						<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
-							</div>
-							<div class="span4">
-				        <%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', '1st Grade', '2nd Grade', '3rd Grade', '4th Grade', '5th Grade'] %>
-							</div>
-						</div>
+<div class="row">
+<div class="span4">
+       <%= f.input :first_name, :label => "First Name" %>
+</div>
+<div class="span4">
+       <%= f.input :last_name, :error => false, :label => "Last Name" %>
+</div>
+<div class="span3">
+       <%= f.input :gender, :as => :radio_buttons, :collection => ["Male", "Female"], :include_blank => false %>
+</div>
+</div>
+       
+<div class="row">
+<div class="span4">
+<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+</div>
+<div class="span4">
+<%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8'], :include_blank => false %>
+</div>
+</div>
         
-						<div class="row">
-							<div class="span4">
-					        	<%= f.input :orphan %>
-							</div>
-							<div class="span4">
-					        	<%= f.input :name_of_parent_or_guardian, :label => "Parent/Guardian" %>
-							</div>
-						</div>
+<div class="row">
+<div class="span4">
+<%= f.input :orphan %>
+</div>
+<div class="span4">
+<%= f.input :name_of_parent_or_guardian, :label => "Parent/Guardian" %>
+</div>
+</div>
     
-				    </fieldset>
-				</div>
-				
-				<div class="tab-pane" id="assessment">
-				    <fieldset>
-				        <%= f.input :height_in_cm, :label => "Height (cm)" %>
-				        <%= f.input :weight_in_kg, :label => "Weight (kg)" %>
-				        <%= f.input :uam_in_cm, :label => "UAM (cm)" %>
-				        <%= f.input :assessment_temperature_in_fahrenheit, :label => "Temperature (&deg;F)" %>
-				        <%= f.input :blood_pressure_systolic, :label => "Systolic Blood Pressure" %>
-				        <%= f.input :blood_pressure_diastolic, :label => "Diastolic Blood Pressure" %>
-				        <%= f.input :has_hearing_complaints %>
-				        <%= f.input :vision_right %>
-				        <%= f.input :vision_left %>
-				        <%= f.input :has_cavities %>
-				        <%= f.input :has_teeth_missing %>
-				        <%= f.input :has_healthy_tongue %>
-				        <%= f.input :has_red_patches %>
-				        <%= f.input :has_evidence_of_yeast %>
-				        <%= f.input :has_big_belly %>
-				        <%= f.input :has_swollen_feet %>
-				        <%= f.input :has_thin_arms_or_legs %>
-				        <%= f.input :has_hair_loss %>
-				        <%= f.input :has_mouth_sores %>
-				        <%= f.input :has_scalp_fungus %>
-				        <%= f.input :has_dry_skin %>
-				        <%= f.input :has_rashes %>
-				        <%= f.input :rash_location %>
-				        <%= f.input :has_had_tb %>
-				        <%= f.input :tb_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :has_tb_treatment_completed %>
-				        <%= f.input :has_had_typhoid %>
-				        <%= f.input :typhoid_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :has_had_malaria %>
-				        <%= f.input :malaria_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :has_menstruated %>
-				        <%= f.input :has_received_menstrual_products %>
-				        <%= f.input :menstrual_products_distribution_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :has_menstrual_product_access %>
-				        <%= f.input :has_toothbrush %>
-				        <%= f.input :has_toothpaste %>
-				        <%= f.input :has_soap %>
-				        <%= f.input :hygenall_products_distribution_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :sleeping_location, :label => "Sleep Location", :collection => ['Bed', 'Floor'] %>
-				        <%= f.input :sleeps_with_mosquito_net, :label => "Sleeps w/ Mosquito Net?" %>
-				        <%= f.input :has_bible %>
-				        <%= f.input :is_christian %>
-				        <%= f.input :is_attending_church %>
-				        <%= f.input :church_location %>
-				        <%= f.input :favorite_color %>
-				        <%= f.input :meals_eaten_per_day %>
-				        <%= f.input :has_food_available_at_home %>
-				        <%= f.input :is_food_prepared_with_charcoal %>
-				        <%= f.input :has_windows_in_home %>
-				        <%= f.input :has_school_uniform %>
-				        <%= f.input :is_school_uniform_in_good_condition %>
-				        <%= f.input :state_of_school_uniform %>
-				        <%= f.input :dress_size %>
-				        <%= f.input :shirt_size %>
-				        <%= f.input :shorts_size %>
-				        <%= f.input :has_shoes %>
-				        <%= f.input :is_shoes_in_good_condition %>
-				        <%= f.input :shoe_size %>
-				        <%= f.input :additional_comments, :as => :text %>
-				    </fieldset>
-				</div>
-    			<div class="tab-pane" id="physical">
-				    <fieldset>
-				        <%= f.input :physical_examination_date, :as => :date, :order => [:month, :day, :year] %>
-				        <%= f.input :physical_examination_temperature_in_celsius, :label => "Temperature (&deg;C)" %>
-				        <%= f.input :health_notes, :as => :text, :label => "Signs of Poor Health" %>
-				        <%= f.input :observations, :as => :text, :label => "Comments" %>
-						<%= f.input :recommendations, :as => :text, :label => "Recommendations" %>
-				        <%= f.input :is_antibiotics_needed %>
-				        <%= f.input :is_antihistamines_needed %>
-				        <%= f.input :is_antifungals_needed %>
-				        <%= f.input :is_vitamins_needed %>
-				        <%= f.input :is_ear_syringing_needed %>
-				        <%= f.input :is_deworming_needed %>
-				        <%= f.input :is_stool_sample_needed %>
-				        <%= f.input :is_dental_attention_needed %>
-				        <%= f.input :is_opthamologist_needed %>
-				        <%= f.input :is_pain_killers_needed %>
-				        <%= f.input :is_blood_test_needed %>
-				        <%= f.input :is_washing_needed %>
-				        <%= f.input :has_umbilical_hernia %>
-				        <%= f.input :additional_physical_examination_notes, :as => :text, :label => "Other Notes" %>
-				    </fieldset>
-				</div>
-			</div>
+  </fieldset>
+</div>
+<div class="tab-pane" id="assessment">
+  <fieldset>
+       <div class="row">
+               <div class="tabbable tabs-left">
+<div class="span2">
+                       <ul class="nav nav-pills nav-stacked">
+                           <li class="active"><a href="#assessment-info" data-toggle="tab">Assessment Info</a></li>
+                           <li><a href="#physical-screening" data-toggle="tab">Physical Screening</a></li>
 
-		    <div class="form-actions">
-		      <%= f.submit 'Save', :class => 'btn btn-primary' %>
-		      <%= link_to 'Cancel', kibera_children_path, :class => 'btn' %>
-		    </div>
+                           <li><a href="#malnutrition-signs" data-toggle="tab">Signs of Malnutrition</a></li>
+                           <li><a href="#disease-history" data-toggle="tab">Disease History</a></li>
+
+                           <li><a href="#personal-hygiene" data-toggle="tab">Personal Hygiene</a></li>
+                           <li><a href="#female-hygiene" data-toggle="tab">Feminine Hygiene</a></li>
+                           <li><a href="#living-conditions" data-toggle="tab">Living Conditions</a></li>
+                           <li><a href="#faith" data-toggle="tab">Faith</a></li>
+                           <li><a href="#clothing" data-toggle="tab">Clothing</a></li>
+                           <li><a href="#misc" data-toggle="tab">Miscellaneous Info</a></li>
+                       </ul>
+                   </div>
+                   <div class="span10">
+                       <div class="tab-content">
+                               <div class="tab-pane active" id="assessment-info">
+
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="physical-screening">
+
+<h3>Body Measurements</h3>
+<div class="row">
+<div class="span4">
+        <%= f.input :height_in_cm, :label => "Height (cm)" %>
+</div>
+<div class="span4">
+        <%= f.input :weight_in_kg, :label => "Weight (kg)" %>
+</div>
+</div>
+<div class="row">
+<div class="span4">
+        <%= f.input :uam_in_cm, :label => "UAM (cm)" %>
+</div>
+</div>
+<h3>Temperature</h3>
+<div class="row">
+<div class="span4">
+        <%= f.input :assessment_temperature_in_fahrenheit, :label => "Temperature (&deg;F)" %>
+</div>
+</div>
+<h3>Vitals</h3>
+<div class="row">
+<div class="span4">
+       <%= f.input :blood_pressure_systolic, :label => "Systolic Blood Pressure" %>
+</div>
+<div class="span4">
+<%= f.input :blood_pressure_diastolic, :label => "Diastolic Blood Pressure" %>
+</div>
+</div>
+<h3>Vision</h3>
+<div class="row">
+<div class="span4">
+<%= f.input :vision_right, :label => "Right Eye" %>
+</div>
+<div class="span4">
+<%= f.input :vision_left, :label => "Left Eye" %>
+
+</div>
+</div>
+<h3>Hearing</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_hearing_complaints, :label => "Hearing Complaints?" %>
+                                   </div>
+                               </div>
+<h3>Teeth</h3>
+                               <div class="row">
+<div class="span2">
+                                    <%= f.input :has_cavities, :label => "Cavities?" %>
+                                </div>
+                                   <div class="span2">
+                                    <%= f.input :has_teeth_missing, :label => "Missing Teeth?" %>
+                                   </div>
+                               </div>
+<h3>Tongue</h3>
+                               <div class="row">
+<div class="span2">
+                                    <%= f.input :has_healthy_tongue, :label => "Healthy Tongue?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_red_patches, :label => "Red Patches?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_evidence_of_yeast, :label => "Evidence of Yeast?" %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="malnutrition-signs">
+                                   <h3>Body</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                    <%= f.input :has_big_belly, :label => "Big Belly?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_swollen_feet, :label => "Swollen Feet?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_thin_arms_or_legs, :label => "Thin Arms/Legs?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_mouth_sores, :label => "Mouth Sores?" %>
+                                   </div>
+                               </div>
+                               <h3>Hair</h3>
+                               <div class="row">
+                                       <div class="span2">
+                                       <%= f.input :has_hair_loss, :label => "Hair Loss?" %>
+                                   </div>
+                                   <div class="span2">
+                                    <%= f.input :has_scalp_fungus, :label => "Scalp Fungus?" %>
+                                   </div>
+                               </div>
+                               <h3>Skin</h3>
+                               <div class="row">
+                                       <div class="span2">
+                                    <%= f.input :has_dry_skin, :label => "Dry Skin?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_rashes, :label => "Rashes?" %>
+                                   </div>
+                                   <div class="span4">
+                                    <%= f.input :rash_location, :label => "Rash Location" %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="disease-history">
+                               <h3>Tuberculosis</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_had_tb, :label => "Had TB?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_tb_treatment_completed, :label => "TB Treatment Completed?" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :tb_date, :as => :date_picker, :label => "TB Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                               <h3>Typhoid</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_had_typhoid, :label => "Had Typhoid?" %>
+                                   </div>
+                                   <div class="offset2 span4">
+                                       <%= f.input :typhoid_date, :as => :date_picker, :label => "Typhoid Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                               <h3>Malaria</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_had_malaria, :label => "Had Malaria?" %>
+                                   </div>
+                                   <div class="offset2 span4">
+                                       <%= f.input :malaria_date, :as => :date_picker, :label => "Malaria Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="personal-hygiene">
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_toothbrush, :label => "Has Toothbrush?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_toothpaste, :label => "Has Toothpaste?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_soap, :label => "Has Soap?" %>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="span4">
+                                          <%= f.input :hygenall_products_distribution_date, :as => :date_picker, :label => "Date Distributed", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="female-hygiene">
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_menstruated, :label => "Has Menstruated?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_menstrual_product_access, :label => "Access to Menstrual Products Now?" %>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                       <div class="span2">
+                                       <%= f.input :has_received_menstrual_products, :label => "Menstrual Products Provided?" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :menstrual_products_distribution_date, :as => :date_picker, :label => "Date of Distribution", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="living-conditions">
+                               <h3>Sleeping Conditions</h3>
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :sleeping_location, :label => "Sleep Location", :collection => ['Bed', 'Floor'] %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :sleeps_with_mosquito_net, :label => "Sleeps w/ Mosquito Net?" %>
+                                   </div>
+                               </div>
+                               <h3>Food</h3>
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :meals_eaten_per_day, :label => "# of Meals Per Day", :collection => 0..10 %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :has_food_available_at_home, :label => "Food Available at Home?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :is_food_prepared_with_charcoal, :label => "Food Prepared w/ Charcoal?" %>
+                                   </div>
+                               </div>
+                               <h3>Home Information</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_windows_in_home, :label => "Windows in Home?" %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="faith">
+                               <div class="row">
+                                    <div class="span2">
+                                       <%= f.input :has_bible, :label => "Has Bible?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :is_christian, :label => "Has Accepted Jesus?" %>
+                                   </div>
+								</div>
+								<div class="row">
+                                    <div class="span2">
+                                       <%= f.input :is_attending_church, :label => "Attends Church?" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :church_location, :label => "Church Location" %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="clothing">
+                               <h3>School Uniform</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_school_uniform, :label => "Has School Uniform?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :is_school_uniform_in_good_condition, :label => "Uniform in Good Condition?" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :state_of_school_uniform, :label => "Uniform Condition" %>
+                                   </div>
+                               </div>
+                               <h3>Uniform Size(s)</h3>
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :dress_size, :label => "Dress Size" %>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :shirt_size, :label => "Shirt Size" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :shorts_size, :label => "Shorts Size" %>
+                                   </div>
+                               </div>
+                               <h3>Shoes</h3>
+                               <div class="row">
+                                   <div class="span2">
+                                       <%= f.input :has_shoes, :label => "Has Shoes?" %>
+                                   </div>
+                                   <div class="span2">
+                                       <%= f.input :is_shoes_in_good_condition, :label => "Shoes in Good Condition?" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :shoe_size, :label => "Shoe Size" %>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="tab-pane" id="misc">
+                               <div class="row">
+                                   <div class="span4">
+                                       <%= f.input :favorite_color, :label => "Favorite Color" %>
+                                   </div>
+                                   <div class="span4">
+                                       <%= f.input :additional_comments, :as => :text, :label => "Additional Comments", :input_html => { :rows => 10 } %>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+       </div>
+  </fieldset>
+</div>
+
+<div class="tab-pane" id="physical">
+  <fieldset>
+       <div class="row">
+               <div class="tabbable tabs-left">
+<div class="span2">
+                       <ul class="nav nav-pills nav-stacked">
+                           <li class="active"><a href="#physical-exam-info" data-toggle="tab">Physical Exam Info</a></li>
+						   <li><a href="#physical-exam-screening" data-toggle="tab">Physical Screening</a></li>
+                           <li><a href="#doctor-recs" data-toggle="tab">Recommendations</a></li>
+                           <li><a href="#doctor-notes" data-toggle="tab">Additional Notes</a></li>
+                       </ul>
+                   </div>
+                   <div class="span10">
+                     	<div class="tab-content">
+	                      	<div class="tab-pane active" id="physical-exam-info">
+						        <div class="row">
+						           <div class="span4">
+						                  <%= f.input :physical_examination_date, :as => :date_picker, :label => "Exam Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+						           </div>
+						        </div>
+							</div>
+                           	<div class="tab-pane" id="physical-exam-screening">
+						        <div class="row">
+						           <div class="span4">
+						                  <%= f.input :physical_examination_temperature_in_celsius, :label => "Temperature (&deg;C)" %>
+						           </div>
+						       </div>
+						   	</div>
+    						<div class="tab-pane" id="doctor-recs">
+						        <div class="row">
+						           <div class="span2">
+						               <%= f.input :is_antibiotics_needed, :label => "Antibiotics Needed?" %>
+						           </div>
+						           <div class="span2">
+						               <%= f.input :is_antifungals_needed, :label => "Antifungals Needed?" %>
+						           </div>
+						           <div class="span2">
+						               <%= f.input :is_antihistamines_needed, :label => "Antihistamines Needed?" %>
+						           </div>
+						           <div class="span2">
+						               <%= f.input :is_vitamins_needed, :label => "Vitamins Needed?" %>
+						           </div>
+						    	</div>
+       <div class="row">
+           <div class="span2">
+               <%= f.input :is_ear_syringing_needed, :label => "Ear Syringing Needed?" %>
+           </div>
+          <div class="span2">
+               <%= f.input :is_deworming_needed, :label => "Deworming Needed?" %>
+              </div>
+           <div class="span2">
+				<%= f.input :is_stool_sample_needed, :label => "Stool Sample Needed?" %>
+              </div>
+              <div class="span2">
+                  <%= f.input :is_dental_attention_needed, :label => "Dental Attention Needed?" %>
+              </div>
+          </div>
+          <div class="row">
+           <div class="span2">
+
+               <%= f.input :is_opthamologist_needed, :label => "Opthamologist Attention Needed?" %>
+              </div>
+          <div class="span2">
+
+               <%= f.input :is_blood_test_needed, :label => "Blood Test Needed?" %>
+              </div>
+              <div class="span2">
+
+                  <%= f.input :is_pain_killers_needed, :label => "Pain Killers Recommended?" %>
+              </div>
+              <div class="span2">
+
+               <%= f.input :is_washing_needed, :label => "Washing Recommended?" %>
+              </div>
+          </div>
+              <div class="row">
+                  <div class="span2">
+
+                       <%= f.input :has_umbilical_hernia, :label => "Has Umbilical Hernia?" %>
+                  </div>
+              </div>
+          </div>
+          <div class="tab-pane" id="doctor-notes">
+
+      <div class="row">
+           <div class="span4">
+                  <%= f.input :health_notes, :as => :text, :label => "Signs of Poor Health", :input_html => { :rows => 10 } %>
+           </div>
+           <div class="span4">
+                  <%= f.input :observations, :as => :text, :label => "Comments", :input_html => { :rows => 10 } %>
+
+              </div>
+</div>
+       <div class="row">
+               <div class="span4">
+                  <%= f.input :recommendations, :as => :text, :label => "Recommendations", :input_html => { :rows => 10 } %>
+              </div>
+           <div class="span4">
+               <%= f.input :additional_physical_examination_notes, :as => :text, :label => "Other Notes", :input_html => { :rows => 10 } %>
+
+           </div>
+        </div>
+    </div>
+      </div>
+      </div>
+      </div>
+  </fieldset>
+</div>
+
+</div>
+
+  <div class="form-actions">
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', :back, :class => 'btn' %>
+  </div>
   
-		<% end %>
+<% end %>
 
-	</div>
+</div>
 </div>

@@ -10,9 +10,10 @@ h1,h2{
 	padding:10px 0 10px 0;
 }
 
-.accordion h3,
-.accordion h4{
+.tab-content h3,
+.tab-content h4{
 	color:#C0C0C0;
+	margin-bottom:10px;
 }
 
 .brand img{

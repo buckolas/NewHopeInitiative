@@ -36,10 +36,13 @@ class ImportsController < ApplicationController
         @kibera_child.height_in_cm = row[col] if row[col+=1]
         # SKIP Row 10 Height in inches
         # SKIP Row 11 Height in feet/inches
+        col+=2
         @kibera_child.weight_in_kg = row[col] if row[col+=1]
         # SKIP Row 13 = Weight in pounds
+        col+=1
         @kibera_child.uam_in_cm = row[col] if row[col+=1]
         # SKIP Row 15 = UAM in inches
+        col+=1
         @kibera_child.assessment_temperature_in_fahrenheit = row[col] if row[col+=1]
         @kibera_child.blood_pressure_systolic = row[col].split("/")[0] if row[col+=1] && row[col].include?("/")
         @kibera_child.blood_pressure_diastolic = row[col].split("/")[1] if row[col] && row[col].include?("/")

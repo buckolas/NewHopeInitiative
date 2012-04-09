@@ -23,10 +23,11 @@ I am very lazy with Git at the moment, so who knows what sort of release format 
 Some ideas I have at the moment for upcoming releases (after the initial deployment) are:
 - An advanced search feature.
 - A bulk edit capability (for moving multiple children to the next grade, deleting, etc).
-- Displaying multiple photos per child (we currently allow 1 per child but have 2 available on a thumb drive and would like to allow even more; however, storage needs to get sorted first).
 - Perhaps the ability to edit a child/user's information inline in the Show view instead of having to go to a separate Edit view.
 - Make some of the selection lists more configurable by administrators (ie. school grade levels)
 - Additional roles to limit user capability for destructive actions like deleting, or to limit some users to viewing data only (no editing)
+- Automated account registration
+- Add capability to upload child photos directly in app
 - Internal cleanup
 
 
@@ -38,11 +39,13 @@ twitter-bootstrap-rails
 
 authlogic
 
-carrierwave
-
 simple_form
 
 will_paginate
+
+aws-s3
+
+paperclip
 
 
 

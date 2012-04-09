@@ -5,7 +5,7 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'pg'
 
 gem 'json'
 
@@ -38,8 +38,7 @@ gem 'authlogic'
 gem "nifty-generators", :group => :development
 gem "mocha", :group => :test
 
-gem "carrierwave"
+gem 'fog'
 gem 'simple_form'
 gem 'will_paginate', '> 3.0'
 gem 'fastercsv'
-gem 'chronic'
