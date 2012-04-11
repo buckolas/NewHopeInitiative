@@ -44,4 +44,13 @@ class String
   def to_grade
     String.to_grade(self)
   end
+  
+  def self.to_sleeping_location(loc)
+    return 'Floor' if loc && loc =~ (/^(floor|f)/i)
+    return 'Bed'
+  end
+  
+  def to_sleeping_location
+    String.to_sleeping_location(self)
+  end
 end

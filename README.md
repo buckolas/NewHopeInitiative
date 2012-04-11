@@ -28,24 +28,9 @@ Some ideas I have at the moment for upcoming releases (after the initial deploym
 - Additional roles to limit user capability for destructive actions like deleting, or to limit some users to viewing data only (no editing)
 - Automated account registration
 - Add capability to upload child photos directly in app
+- Upgrade to Ruby 1.9
+- Field for nicknames
 - Internal cleanup
-
-
-
-Dependencies
-------------
-
-twitter-bootstrap-rails
-
-authlogic
-
-simple_form
-
-will_paginate
-
-aws-s3
-
-paperclip
 
 
 

@@ -6,19 +6,19 @@ class KiberaChildrenController < ApplicationController
     if params[:per_page]
       session[:per_page] = params[:per_page].to_i
     end
-    
+
     if params[:grade]
       session[:grade] = (params[:grade].downcase == "all") ? nil : params[:grade]
     end
-    
+
     if params[:search]
-      session[:search] = params[:search]
-    elsif params[:grade].nil? && params[:per_page].nil?
-      session[:search] = nil
+      session[:search] = (params[:search].empty?) ? nil : params[:search]
+      session[:per_page] = nil
+      session[:grade] = nil
     end
-    
+
     @kibera_children = KiberaChild.find_children(session[:search], session[:grade]).page(params[:page]).per_page(session[:per_page] || 25)
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @kibera_children }
@@ -29,6 +29,10 @@ class KiberaChildrenController < ApplicationController
   # GET /kibera_children/1.json
   def show
     @kibera_child = KiberaChild.find(params[:id])
+    
+    Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+        @child_photos = @kibera_child.photos
+    end
 
     respond_to do |format|
       format.html # show.html.erb

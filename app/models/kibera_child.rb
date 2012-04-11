@@ -1,4 +1,3 @@
-# require 'aws/s3'
 require 'rubygems'
 require 'fog'
 
@@ -8,7 +7,7 @@ class KiberaChild < ActiveRecord::Base
   
   def self.find_children(search, grade)
     children = KiberaChild.order("last_name ASC, first_name ASC")
-    children = children.where("last_name LIKE ? OR first_name LIKE ?", "%" + search + "%", "%" + search + "%") if search
+    children = children.where("lower(last_name) LIKE ? OR lower(first_name) LIKE ?", "%" + search.downcase + "%", "%" + search.downcase + "%") if search
     children = children.where("grade = ?", String.to_grade(grade)) if grade
     children
   end
@@ -21,13 +20,6 @@ class KiberaChild < ActiveRecord::Base
   end
   
   def photos
-    #s3 = AWS::S3.new
-    #bucket = s3.buckets[AWS_CONFIG['s3_bucket']]
-    #photos = bucket.objects['img']
-    #.url_for(:read)
-    # photos = AWS::S3::Bucket.objects(AWS_CONFIG['s3_bucket'], :prefix => 'img/' + first_name + ' ' + last_name)
-    # photos
-    
     # create a connection
     connection = Fog::Storage.new({
       :provider                 => 'AWS',
@@ -41,7 +33,6 @@ class KiberaChild < ActiveRecord::Base
     # all child images
     photos = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
     photos
-    
   end
   
   private 

@@ -17,10 +17,6 @@ class ImportsController < ApplicationController
         @kibera_child.last_name = row[col].strip if row[col+=1]
         @kibera_child.grade = String.to_grade row[col+=1]
         
-        # TODO
-        # Row 4 = Y/N if a photo exists
-        # is_photo_avail = row[4]String.to_bool
-        
         if row[5].nil? && row[6] && @kibera_child.assessment_documentation_date
           # If there is not birthdate in the spreadsheet, use the age and assessment date if available to make a guess
           age = row[6].to_i
@@ -78,7 +74,7 @@ class ImportsController < ApplicationController
         @kibera_child.has_toothpaste = String.to_bool row[col+=1]
         @kibera_child.has_soap = String.to_bool row[col+=1]
         @kibera_child.hygenall_products_distribution_date = Date.parse(row[col+=1], true) rescue Date.today
-        @kibera_child.sleeping_location = row[col] if row[col+=1]
+        @kibera_child.sleeping_location = String.to_sleeping_location(row[col+=])
         @kibera_child.sleeps_with_mosquito_net = row[col] if row[col+=1]
         @kibera_child.has_bible = String.to_bool row[col+=1]
         @kibera_child.is_christian = String.to_bool row[col+=1]
