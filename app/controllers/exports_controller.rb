@@ -1,16 +1,9 @@
-if RUBY_VERSION < "1.9"
-require "rubygems"
-require "faster_csv"
-CSV = FCSV
-else
 require "csv"
-end
 
 class ExportsController < ApplicationController
   def index
     @children = KiberaChild.find_children(session[:search], session[:grade])
     n=0
-
 
     csv_string = CSV.generate do |csv|
       # header row
