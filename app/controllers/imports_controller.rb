@@ -74,7 +74,7 @@ class ImportsController < ApplicationController
         @kibera_child.has_toothpaste = String.to_bool row[col+=1]
         @kibera_child.has_soap = String.to_bool row[col+=1]
         @kibera_child.hygenall_products_distribution_date = Date.parse(row[col+=1], true) rescue Date.today
-        @kibera_child.sleeping_location = String.to_sleeping_location(row[col+=])
+        @kibera_child.sleeping_location = String.to_sleeping_location row[col+=1]
         @kibera_child.sleeps_with_mosquito_net = row[col] if row[col+=1]
         @kibera_child.has_bible = String.to_bool row[col+=1]
         @kibera_child.is_christian = String.to_bool row[col+=1]
