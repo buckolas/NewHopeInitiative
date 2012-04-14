@@ -27,7 +27,7 @@
        
 <div class="row">
 <div class="span4">
-<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth" %>
 </div>
 <div class="span4">
 <%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8'], :include_blank => false %>
@@ -71,7 +71,7 @@
 
                                <div class="row">
                                    <div class="span4">
-                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date" %>
                                    </div>
                                </div>
                            </div>
@@ -192,7 +192,7 @@
                                        <%= f.input :has_tb_treatment_completed, :label => "TB Treatment Completed?" %>
                                    </div>
                                    <div class="span4">
-                                       <%= f.input :tb_date, :as => :date_picker, :label => "TB Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                       <%= f.input :tb_date, :as => :date_picker, :label => "TB Date" %>
                                    </div>
                                </div>
                                <h3>Typhoid</h3>
@@ -201,7 +201,7 @@
                                        <%= f.input :has_had_typhoid, :label => "Had Typhoid?" %>
                                    </div>
                                    <div class="offset2 span4">
-                                       <%= f.input :typhoid_date, :as => :date_picker, :label => "Typhoid Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                       <%= f.input :typhoid_date, :as => :date_picker, :label => "Typhoid Date" %>
                                    </div>
                                </div>
                                <h3>Malaria</h3>
@@ -210,7 +210,7 @@
                                        <%= f.input :has_had_malaria, :label => "Had Malaria?" %>
                                    </div>
                                    <div class="offset2 span4">
-                                       <%= f.input :malaria_date, :as => :date_picker, :label => "Malaria Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                       <%= f.input :malaria_date, :as => :date_picker, :label => "Malaria Date" %>
                                    </div>
                                </div>
                            </div>
@@ -228,7 +228,7 @@
                                </div>
                                <div class="row">
                                    <div class="span4">
-                                          <%= f.input :hygenall_products_distribution_date, :as => :date_picker, :label => "Date Distributed", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                          <%= f.input :hygenall_products_distribution_date, :as => :date_picker, :label => "Date Distributed" %>
                                    </div>
                                </div>
                            </div>
@@ -246,7 +246,7 @@
                                        <%= f.input :has_received_menstrual_products, :label => "Menstrual Products Provided?" %>
                                    </div>
                                    <div class="span4">
-                                       <%= f.input :menstrual_products_distribution_date, :as => :date_picker, :label => "Date of Distribution", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+                                       <%= f.input :menstrual_products_distribution_date, :as => :date_picker, :label => "Date of Distribution" %>
                                    </div>
                                </div>
                            </div>
@@ -371,7 +371,7 @@
 	                      	<div class="tab-pane active" id="physical-exam-info">
 						        <div class="row">
 						           <div class="span4">
-						                  <%= f.input :physical_examination_date, :as => :date_picker, :label => "Exam Date", :order => [:month, :day, :year], :start_year => Date.today.year - 40, :end_year => Date.today.year %>
+						                  <%= f.input :physical_examination_date, :as => :date_picker, :label => "Exam Date" %>
 						           </div>
 						        </div>
 							</div>

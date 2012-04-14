@@ -10,9 +10,9 @@
 			<% if @child_photos.count > 0 %>
 				<% @child_photos.each_with_index do |photo, index| %>
 					<% if index == 0 %>
-						<div class="active item"><%= image_tag(photo.url(Time.now+3600)) %> </div>
+						<div class="active item"><%= image_tag(photo) %> </div>
 					<% else %>
-						<div class="item"><%= image_tag(photo.url(Time.now+3600)) %> </div>
+						<div class="item"><%= image_tag(photo) %> </div>
 					<% end %>
 				<% end %>
 			<% else %>
@@ -28,7 +28,7 @@
 <div class="row">
 <div class="span2">
 <b>Birthdate</b><br>
-<%= l @kibera_child.birth_date || 'Unknown' %>
+<%= @kibera_child.birth_date ? (l @kibera_child.birth_date) : 'Unknown' %>
 </div>
 <div class="span2">
 <b>Age</b><br>
@@ -69,7 +69,7 @@
 <div class="row">
 <div class="span6">
 <b>Date of Assessment: </b>
-<%= l @kibera_child.assessment_documentation_date || 'Unknown' %>
+<%= @kibera_child.assessment_documentation_date ? (l @kibera_child.assessment_documentation_date) : 'Unknown' %>
 </div>
 </div>
 <div class="row">
@@ -269,7 +269,7 @@
 							</div>
 							<div class="span2">
 							<b>Date</b><br/>
-							<%= l @kibera_child.tb_date || 'Unknown' %>
+							<%= @kibera_child.tb_date ? (l @kibera_child.tb_date) : 'Unknown' %>
 							</div>
 							<div class="span2">
 							<b>Treatment Completed?</b><br/>
@@ -290,7 +290,7 @@
 							</div>
 							<div class="span2">
 							<b>Date</b><br/>
-							<%= l @kibera_child.typhoid_date || 'Unknown' %>
+							<%= @kibera_child.typhoid_date ? (l @kibera_child.typhoid_date) : 'Unknown' %>
 							</div>
 							</div>
 							<h3>Malaria</h3>
@@ -301,7 +301,7 @@
 							</div>
 							<div class="span2">
 							<b>Date</b><br/>
-							<%= l @kibera_child.malaria_date || 'Unknown' %>
+							<%= @kibera_child.malaria_date ? (l @kibera_child.malaria_date) : 'Unknown' %>
 							</div>
 							</div>
 							</div>
@@ -336,7 +336,7 @@
 </div>
 <div class="span2">
 <b>Date Given</b><br/>
-<%= l @kibera_child.hygenall_products_distribution_date || 'Unknown' %>
+<%= @kibera_child.hygenall_products_distribution_date ? (l @kibera_child.hygenall_products_distribution_date) : 'Unknown' %>
 </div>
 </div>
                        </div>
@@ -368,7 +368,7 @@
 </div>
 <div class="span2">
 <b>Date Given</b><br/>
-<%= l @kibera_child.menstrual_products_distribution_date || 'Unknown' %>
+<%= @kibera_child.menstrual_products_distribution_date ? (l @kibera_child.menstrual_products_distribution_date) : 'Unknown' %>
 </div>
 <div class="span2">
 <b>Has Access Now?</b><br/>
@@ -567,7 +567,7 @@
 <div class="row">
 <div class="span6">
 <b>Physical Examination Date: </b>
-<%= l @kibera_child.physical_examination_date || 'Unknown' %>
+<%= @kibera_child.physical_examination_date ? (l @kibera_child.physical_examination_date) : 'Unknown' %>
 </div>
 </div>
 <div class="row">

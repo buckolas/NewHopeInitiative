@@ -30,8 +30,8 @@ class KiberaChildrenController < ApplicationController
   def show
     @kibera_child = KiberaChild.find(params[:id])
     
-    Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
-        @child_photos = @kibera_child.photos
+    @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+        @kibera_child.photos
     end
 
     respond_to do |format|
@@ -77,6 +77,10 @@ class KiberaChildrenController < ApplicationController
   # PUT /kibera_children/1.json
   def update
     @kibera_child = KiberaChild.find(params[:id])
+    puts "Model: " + @kibera_child.birth_date.to_s
+    puts "Params: " + params[:birth_date].to_s
+    @kibera_child.first_name.strip!
+    @kibera_child.last_name.strip!
 
     respond_to do |format|
       if @kibera_child.update_attributes(params[:kibera_child])

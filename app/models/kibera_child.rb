@@ -31,7 +31,9 @@ class KiberaChild < ActiveRecord::Base
     directory = connection.directories.get(AWS_CONFIG['s3_bucket'])
 
     # all child images
-    photos = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+    photos = []
+    files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+    files.each {|file| photos << file.url(Time.now+43200) }
     photos
   end
   
