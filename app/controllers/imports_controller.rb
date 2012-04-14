@@ -3,10 +3,8 @@ require 'csv'
 class ImportsController < ApplicationController
   def create
     if params[:csvFile]
-      csvFile = params[:csvFile]
-      parsedCSVFile = CSV::Reader.parse(csvFile)
       n=0
-      parsedCSVFile.each do |row|
+      CSV.parse params[:csvFile].read do |row|
         @kibera_child = KiberaChild.new
         col = 0
         
