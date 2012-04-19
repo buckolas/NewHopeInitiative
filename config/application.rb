@@ -1,4 +1,4 @@
-YAML::ENGINE.yamler = "syck"
+#YAML::ENGINE.yamler = "syck"
 
 require File.expand_path('../boot', __FILE__)
 

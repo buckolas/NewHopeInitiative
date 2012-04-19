@@ -14,7 +14,29 @@ $(document).ready(function() {
 	$("a.delete-confirm").click(function(e) {
 	    e.preventDefault();
 		var deleteHref = this.href;
-	    bootbox.confirm("Are you sure you want to delete this child?", "Cancel", "Delete", {
+	    bootbox.confirm("Are you sure you want to delete this child? This action cannot be undone.", "Cancel", "Delete", {
+			'classname': 'btn-danger',
+			'callback': function(result) {
+			    if (result) {
+					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
+		                .append('<input type="hidden" name="_method" value="delete" />')
+		                .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
+		                .appendTo('body')
+		                .submit();
+			    }
+			}
+		}, {
+			'header': 'Delete Confirm',
+			'headerCloseButton': false,
+			'animate': false
+		});
+		return false;
+	});
+	
+	$("a.delete-user-confirm").click(function(e) {
+	    e.preventDefault();
+		var deleteHref = this.href;
+	    bootbox.confirm("Are you sure you want to delete this user? This action cannot be undone.", "Cancel", "Delete", {
 			'classname': 'btn-danger',
 			'callback': function(result) {
 			    if (result) {
