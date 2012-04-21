@@ -1,19 +1,91 @@
-<% title 'User Info' %>
+<div class="row">
+	<div class="span12">
+		<h2 class="centered-text"><%= @user.first_name %> <%= @user.last_name %></h2>
+	</div>
+</div>
 
-<p>
-  <b>Email</b><br>
-  <%= @user.email %>
-</p>
+<div class="row">
+	<div class="span3">
+		<div class="row">
+			<div class="span3">
+				<b>First Name</b><br>
+				<%= @user.first_name %>
+			</div>
+		</div>
 
-<p>
-  <b>First Name</b><br>
-  <%= @user.first_name %>
-</p>
+		<div class="row">
+			<div class="span3">
+				<b>Last Name</b><br>
+				<%= @user.last_name %>
+			</div>
+		</div>
 
-<p>
-  <b>Last Name</b><br>
-  <%= @user.last_name %>
-</p>
+		<div class="row">
+			<div class="span3">
+				<b>Email</b><br>
+				<%= @user.email %>
+			</div>
+		</div>
+	</div>
+	<% if current_user.is_admin? %>
+		<div class="span3">
+		
+			<div class="row">
+				<div class="span3">
+				  <b>Administrator?</b><br>
+				  <%= @user.is_admin? ? 'Yes' : 'No' %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span3">
+				  <b># of Failed Logins</b><br>
+				  <%= @user.failed_login_count %>
+				</div>
+			</div>
+
+		</div>
+		<div class="span3">
+
+			<div class="row">
+				<div class="span3">
+				  <b>Last Request Date/Time</b><br>
+				  <%= @user.last_request_at ? (l @user.last_request_at, :format => :long) : 'N/A' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span3">
+				  <b>Current Login Date/Time</b><br>
+				  <%= @user.current_login_at ? (l @user.current_login_at, :format => :long) : 'N/A' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span3">
+				  <b>Last Login Date/Time</b><br>
+				  <%= @user.last_login_at ? (l @user.last_login_at, :format => :long) : 'N/A' %>
+				</div>
+			</div>
+			
+		</div>
+		<div class="span3">
+
+			<div class="row">
+				<div class="span3">
+				  <b>Current Login IP</b><br>
+				  <%= @user.current_login_ip || 'N/A' %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span3">
+				  <b>Last Login IP</b><br>
+				  <%= @user.last_login_ip || 'N/A' %>
+				</div>
+			</div>
+		
+		</div>
+	<% end %>
+</div>
 
 <div class="form-actions">
   <%= link_to 'Back', users_path, :class => 'btn'  %>

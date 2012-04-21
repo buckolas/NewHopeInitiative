@@ -25,7 +25,7 @@ class UserSessionsController < ApplicationController
   private
   
   def is_currently_logged_in
-      if current_user_session
+      if current_user_session && !current_user_session.stale?
           redirect_to root_url
       end
   end

@@ -1,59 +1,61 @@
 <div class="row">
-<div class="span8">
-<h2 class="centered-text"><%= @kibera_child.first_name %> <%= @kibera_child.last_name %></h2>
-</div>
-</div>
-<div class="row">
-<div class="span3">
-	<div id="child-photos" class="carousel">
-		<div class="carousel-inner">
-			<% if @child_photos.count > 0 %>
-				<% @child_photos.each_with_index do |photo, index| %>
-					<% if index == 0 %>
-						<div class="active item"><%= image_tag(photo) %> </div>
-					<% else %>
-						<div class="item"><%= image_tag(photo) %> </div>
-					<% end %>
-				<% end %>
-			<% else %>
-				<div class="active item"><%= image_tag("no-image.png") %> </div>
-			<% end %>
-		</div>
-		<a class="carousel-control left" href="#child-photos" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#child-photos" data-slide="next">&rsaquo;</a>
+	<div class="span8">
+		<h2 class="centered-text"><%= @kibera_child.first_name %> <%= @kibera_child.last_name %></h2>
 	</div>
 </div>
+<div class="row">
+	<div class="span3">
+		<div id="child-photos" class="carousel">
+			<div class="carousel-inner">
+				<% if @child_photos.count > 0 %>
+					<% @child_photos.each_with_index do |photo, index| %>
+						<% if index == 0 %>
+							<div class="active item"><%= image_tag(photo) %> </div>
+						<% else %>
+							<div class="item"><%= image_tag(photo) %> </div>
+						<% end %>
+					<% end %>
+				<% else %>
+					<div class="active item"><%= image_tag("no-image.png") %> </div>
+				<% end %>
+			</div>
+			<% if @child_photos.count > 1 %>
+				<a class="carousel-control left" href="#child-photos" data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#child-photos" data-slide="next">&rsaquo;</a>
+			<% end %>
+		</div>
+	</div>
 
-<div class="span6">
-<div class="row">
-<div class="span2">
-<b>Birthdate</b><br>
-<%= @kibera_child.birth_date ? (l @kibera_child.birth_date) : 'Unknown' %>
-</div>
-<div class="span2">
-<b>Age</b><br>
-<%= @kibera_child.age %>
-</div>
-<div class="span2">
-<b>Class</b><br>
-<%= @kibera_child.grade || 'Unknown' %>
-</div>
-</div>
-<div class="row">
-<div class="span2">
-<b>Gender</b><br>
-<%= @kibera_child.gender || 'Unknown' %>
-</div>
-<div class="span2">
-<b>Orphan</b><br/>
-<%= @kibera_child.orphan || 'Unknown' %>
-</div>
-<div class="span2">
-<b>Parent or Guardian</b><br/>
-<%= @kibera_child.name_of_parent_or_guardian || 'Unknown' %>
-</div>
-</div>
-</div>
+	<div class="span6">
+		<div class="row">
+			<div class="span2">
+				<b>Birthdate</b><br>
+				<%= @kibera_child.birth_date ? (l @kibera_child.birth_date) : 'Unknown' %>
+			</div>
+			<div class="span2">
+				<b>Age</b><br>
+				<%= @kibera_child.age %>
+			</div>
+			<div class="span2">
+				<b>Class</b><br>
+				<%= @kibera_child.grade || 'Unknown' %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<b>Gender</b><br>
+				<%= @kibera_child.gender || 'Unknown' %>
+			</div>
+			<div class="span2">
+				<b>Orphan</b><br/>
+				<%= @kibera_child.orphan || 'Unknown' %>
+			</div>
+			<div class="span2">
+				<b>Parent or Guardian</b><br/>
+				<%= @kibera_child.name_of_parent_or_guardian || 'Unknown' %>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="row">

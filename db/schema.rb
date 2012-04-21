@@ -14,7 +14,6 @@
 ActiveRecord::Schema.define(:version => 20120419015113) do
 
   create_table "kibera_children", :force => true do |t|
-    t.string   "image"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "grade"
