@@ -21,21 +21,21 @@ class String
     grade_out = 'Pre-Unit'
     if grade
       if grade.include?('1')
-        grade_out = 'Class 1'
+        grade_out = '1'
       elsif grade.include?('2')
-        grade_out = 'Class 2'
+        grade_out = '2'
       elsif grade.include?('3')
-        grade_out = 'Class 3'
+        grade_out = '3'
       elsif grade.include?('4')
-        grade_out = 'Class 4'
+        grade_out = '4'
       elsif grade.include?('5')
-        grade_out = 'Class 5'
+        grade_out = '5'
       elsif grade.include?('6')
-        grade_out = 'Class 6'
+        grade_out = '6'
       elsif grade.include?('7')
-        grade_out = 'Class 7'
+        grade_out = '7'
       elsif grade.include?('8')
-        grade_out = 'Class 8'
+        grade_out = '8'
       end
     end
     grade_out
@@ -52,5 +52,15 @@ class String
   
   def to_sleeping_location
     String.to_sleeping_location(self)
+  end
+  
+  def self.to_orphan(orphan)
+    return 'Single' if orphan && orphan =~ (/^(single|s|1)/i)
+    return 'Double' if orphan && orphan =~ (/^(double|d|2)/i)
+    return 'Not Applicable'
+  end
+  
+  def to_orphan
+    String.to_orphan(self)
   end
 end

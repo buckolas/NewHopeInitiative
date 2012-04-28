@@ -25,7 +25,7 @@ class ImportsController < ApplicationController
         
         col = 6
         @kibera_child.gender = String.to_gender row[col+=1]
-        @kibera_child.orphan = row[col] if row[col+=1]
+        @kibera_child.orphan = String.to_orphan row[col+=1]
         @kibera_child.name_of_parent_or_guardian = row[col] if row[col+=1]
         @kibera_child.height_in_cm = row[col] if row[col+=1]
         # SKIP Row 10 Height in inches

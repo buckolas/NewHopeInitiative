@@ -11,7 +11,6 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       redirect_to root_url, :notice => "Successfully logged in."
     else
-      puts @user_session.errors
       render :action => 'new'
     end
   end

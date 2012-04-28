@@ -64,7 +64,7 @@ class KiberaChildrenController < ApplicationController
     @kibera_child.last_name.strip!
     respond_to do |format|
       if @kibera_child.save
-        format.html { redirect_to @kibera_child, :notice => 'Kibera child was successfully created.' }
+        format.html { redirect_to @kibera_child, :notice => '#{@kibera_child.first_name} #{@kibera_child.last_name} was successfully created.' }
         format.json { render :json => @kibera_child, :status => :created, :location => @kibera_child }
       else
         format.html { render :action => "new" }
@@ -77,14 +77,12 @@ class KiberaChildrenController < ApplicationController
   # PUT /kibera_children/1.json
   def update
     @kibera_child = KiberaChild.find(params[:id])
-    puts "Model: " + @kibera_child.birth_date.to_s
-    puts "Params: " + params[:birth_date].to_s
     @kibera_child.first_name.strip!
     @kibera_child.last_name.strip!
 
     respond_to do |format|
       if @kibera_child.update_attributes(params[:kibera_child])
-        format.html { redirect_to @kibera_child, :notice => 'Kibera child was successfully updated.' }
+        format.html { redirect_to @kibera_child, :notice => '#{@kibera_child.first_name} #{@kibera_child.last_name} was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

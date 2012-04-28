@@ -5,8 +5,14 @@
 	<%= f.input :email %>
 	<%= f.input :first_name, :label => 'First Name' %>
 	<%= f.input :last_name, :label => 'Last Name' %>
-	<%= f.input :password %>
-	<%= f.input :password_confirmation, :label => 'Password Confirmation', :error => false %>
+	<% if @user.id == current_user.id %>
+		<%= f.input :old_password, :label => 'Old Password' %>
+		<%= f.input :password, :label => 'New Password' %>
+		<%= f.input :password_confirmation, :label => 'New Password Confirmation', :error => false %>
+	<% else %>
+		<%= f.input :password %>
+		<%= f.input :password_confirmation, :label => 'Password Confirmation', :error => false %>
+	<% end %>
 	
 	<% if current_user.is_admin? && @user.email != current_user.email %>
 		<%= f.input :is_admin, :label => 'Administrator', :as => :boolean %>

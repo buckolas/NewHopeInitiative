@@ -1,51 +1,51 @@
 <div class="row">
-<div class="span12">
-<h1><%= controller.action_name.capitalize %> Kibera Child</h1>
-<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
-<div class="tabbable">
-<ul class="nav nav-tabs">
-<li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
-<li><a href="#assessment" data-toggle="tab">Assessment Info</a></li>
-<li><a href="#physical" data-toggle="tab">Physical Exam</a></li>
-</ul>
-</div>
-<div class="tab-content">
-<div class="tab-pane active" id="general">
-  <fieldset>
+	<div class="span12">
+		<h1><%= controller.action_name.capitalize %> Kibera Child</h1>
+		<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
+					<li><a href="#assessment" data-toggle="tab">Assessment Info</a></li>
+					<li><a href="#physical" data-toggle="tab">Physical Exam</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane active" id="general">
+  					<fieldset>
         
-<div class="row">
-<div class="span4">
-       <%= f.input :first_name, :label => "First Name" %>
-</div>
-<div class="span4">
-       <%= f.input :last_name, :error => false, :label => "Last Name" %>
-</div>
-<div class="span3">
-       <%= f.input :gender, :as => :radio_buttons, :collection => ["Male", "Female"], :include_blank => false %>
-</div>
-</div>
+						<div class="row">
+							<div class="span4">
+								<%= f.input :first_name, :label => "First Name" %>
+							</div>
+							<div class="span4">
+								<%= f.input :last_name, :error => false, :label => "Last Name" %>
+							</div>
+							<div class="span3">
+								<%= f.input :gender, :as => :radio_buttons, :collection => ['Male', 'Female'], :include_blank => false %>
+							</div>
+						</div>
        
-<div class="row">
-<div class="span4">
-<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth" %>
-</div>
-<div class="span4">
-<%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8'], :include_blank => false %>
-</div>
-</div>
+						<div class="row">
+							<div class="span4">
+								<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth" %>
+							</div>
+							<div class="span4">
+								<%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', '1', '2', '3', '4', '5', '6', '7', '8'], :include_blank => false %>
+							</div>
+						</div>
         
-<div class="row">
-<div class="span4">
-<%= f.input :orphan %>
-</div>
-<div class="span4">
-<%= f.input :name_of_parent_or_guardian, :label => "Parent/Guardian" %>
-</div>
-</div>
+						<div class="row">
+							<div class="span4">
+								<%= f.input :orphan, :label => "Orphan", :collection => ['Not Applicable', 'Single', 'Double'], :include_blank => false %>
+							</div>
+							<div class="span4">
+								<%= f.input :name_of_parent_or_guardian, :label => "Parent/Guardian" %>
+							</div>
+						</div>
     
-  </fieldset>
-</div>
-<div class="tab-pane" id="assessment">
+					</fieldset>
+			</div>
+			<div class="tab-pane" id="assessment">
   <fieldset>
        <div class="row">
                <div class="tabbable tabs-left">

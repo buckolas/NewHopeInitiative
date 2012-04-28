@@ -41,20 +41,24 @@ class UsersController < ApplicationController
   end
   
   def update
-    if(params[:id] == 'current')
-      @user = current_user
-      if @user.update_attributes(params[:user])
-        redirect_to root_url, :notice => "Successfully updated your profile."
+    @user = User.find(params[:id])
+    is_self = @user.id == current_user.id
+    if is_self || (!is_self && current_user.is_admin)
+      is_old_empty = params[:user][:old_password].nil? || params[:user][:old_password].empty?
+      is_new_empty = (params[:user][:password].nil? || params[:user][:password].empty?) && (params[:user][:password_confirmation].nil? || params[:user][:password_confirmation].empty?)
+      if !is_self || is_new_empty || (!is_old_empty && !is_new_empty && @user.valid_password?(params[:user][:old_password]))
+        if @user.update_attributes(params[:user].reject{|key, value| key == "old_password"})
+          redirect_to root_url, :notice => "Successfully updated your profile." if is_self
+          redirect_to users_path, :notice => "Successfully updated user's profile." unless is_self
+        else
+          render :action => 'edit'
+        end
       else
+        @user.errors.add(:old_password, 'is incorrect.')
         render :action => 'edit'
       end
     else
-      @user = User.find(params[:id])
-      if @user.update_attributes(params[:user])
-        redirect_to users_url, :notice => "Successfully updated user profile."
-      else
-        render :action => 'edit'
-      end
+      redirect_to root_url
     end
   end
   
