@@ -1,4 +1,4 @@
-[New Hope Initiative (NHI) - Internal Tracking Tool](http://newhopeinitiative.org)
+[New Hope Initiative (NHI) - Internal Tracking Tool](http://nhi.herokuapp.com)
 ====================================================
 
 This application is intended for use by the New Hope Initiative staff members. It was built with the intended benefit for the children that come into the care of the organization by tracking their illnesses, medical history, etc so that the organization monitor each child's needs and meet them accordingly. 
@@ -18,28 +18,9 @@ Future Work
 
 Since this is an internal-use only tool built in my spare time, I will push out updates when I am able depending on the amount of work involved. Priority communicated to me by NHI staff for each outstanding issue will be used to set the order in which fixes/changes are released. 
 
-I am very lazy with Git at the moment, so who knows what sort of release format I will follow. Most likely everything will be released as major.
+I am very lazy with Git at the moment, so who knows what sort of release format I will follow. Most likely everything will be released into the major branch.
 
-Some ideas I have at the moment for upcoming releases (after the initial deployment) are:
-- An advanced search feature.
-- A bulk edit capability (for moving multiple children to the next grade, deleting, etc).
-- Perhaps the ability to edit a child/user's information inline in the Show view instead of having to go to a separate Edit view.
-- Make some of the selection lists more configurable by administrators (ie. school grade levels)
-- Additional roles to limit user capability for destructive actions like deleting, or to limit some users to viewing data only (no editing)
-- Automated account registration
-- Add capability to upload child photos directly in app
-- Upgrade to Ruby 1.9
-- Field for nicknames
-- Internal cleanup
-
-
-
-Bug tracker
------------
-
-Have a bug? Please create an issue here on GitHub!
-
-https://github.com/buckolas/NewHopeInitiative/issues
+Upcoming releases and bug fixes are listed [here](https://github.com/buckolas/NewHopeInitiative/issues)
 
 
 
