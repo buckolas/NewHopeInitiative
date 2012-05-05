@@ -149,6 +149,10 @@ form .thumbnails > li{
 	line-height:30px;
 }
 
+#expansion-link{
+	color:#3A5894;
+}
+
 #footer{
 	margin-top: 45px;
 	padding: 15px 0 35px;

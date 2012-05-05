@@ -59,32 +59,38 @@
 </div>
 
 <div class="row">
-<div class="span9">
-<div class="tabbable">
-<ul class="nav nav-tabs">
-<li class="active"><a href="#assessment" data-toggle="tab">Assessment</a></li>
-<li><a href="#physical" data-toggle="tab">Physical</a></li>
-</ul>
+	<div class="span9">
+		<h4><a href="#" id="expansion-link">Expand All <i class="icon-resize-full"></i></a><br/></h4>
+	</div>
 </div>
-<div class="tab-content">
-<div class="tab-pane active" id="assessment">
+
 <div class="row">
-<div class="span6">
-<b>Date of Assessment: </b>
-<%= @kibera_child.assessment_documentation_date ? (l @kibera_child.assessment_documentation_date) : 'Unknown' %>
-</div>
-</div>
-<div class="row">
-<div class="span9">
-<div class="accordion" id="physical-screening">
-               <div class="accordion-group">
-                   <div class="accordion-heading">
-                       <a class="accordion-toggle" data-toggle="collapse" data-parent="#physical-screening" href="#collapse-physical-screening">
-                           Physical Screening
-                       </a>
-                   </div>
-                   <div id="collapse-physical-screening" class="accordion-body collapse">
-                       <div class="accordion-inner">
+	<div class="span9">
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#assessment" data-toggle="tab">Assessment</a></li>
+				<li><a href="#physical" data-toggle="tab">Physical</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div class="tab-pane active" id="assessment">
+				<div class="row">
+					<div class="span6">
+						<b>Date of Assessment: </b>
+						<%= @kibera_child.assessment_documentation_date ? (l @kibera_child.assessment_documentation_date) : 'Unknown' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span9">
+						<div class="accordion" id="physical-screening">
+			               <div class="accordion-group">
+			                   <div class="accordion-heading">
+			                       <a class="accordion-toggle" data-toggle="collapse" data-parent="#physical-screening" href="#collapse-physical-screening">
+			                           Physical Screening
+			                       </a>
+			                   </div>
+			                   <div id="collapse-physical-screening" class="accordion-body collapse">
+			                       <div class="accordion-inner">
 <h3>Weight</h3>
 <div class="row">
 <div class="span3">

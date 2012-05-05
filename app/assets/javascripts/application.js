@@ -56,4 +56,17 @@ $(document).ready(function() {
 	});
 	
 	$("input.date_picker").datepicker();
+	
+	$("#expansion-link").click(function(e) {
+	    e.preventDefault();
+		if($(this).text().toLowerCase().indexOf("expand") >= 0){
+			$(this).html("Collapse All <i class='icon-resize-small'></i>")
+			$(".accordion-body").collapse('show')
+		}
+		else{
+			$(this).html("Expand All <i class='icon-resize-full'></i>")
+			$(".accordion-body").collapse('hide')
+		}
+		return false;
+	});
 });
