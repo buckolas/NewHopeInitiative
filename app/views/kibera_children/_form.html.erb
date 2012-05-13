@@ -18,7 +18,7 @@
 								<%= f.input :first_name, :label => "First Name" %>
 							</div>
 							<div class="span4">
-								<%= f.input :last_name, :error => false, :label => "Last Name" %>
+								<%= f.input :last_name, :label => "Last Name" %>
 							</div>
 							<div class="span3">
 								<%= f.input :gender, :as => :radio_buttons, :collection => ['Male', 'Female'], :include_blank => false %>
@@ -27,7 +27,7 @@
        
 						<div class="row">
 							<div class="span4">
-								<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth" %>
+								<%= f.input :birth_date, :as => :date_picker, :label => "Date of Birth", :input_html => { :value => @kibera_child.birth_date_formatted } %>
 							</div>
 							<div class="span4">
 								<%= f.input :grade, :label => "Grade", :collection => ['Pre-Unit', '1', '2', '3', '4', '5', '6', '7', '8'], :include_blank => false %>
@@ -71,7 +71,7 @@
 
                                <div class="row">
                                    <div class="span4">
-                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date" %>
+                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date", :input_html => { :value => @kibera_child.assessment_documentation_date_formatted } %>
                                    </div>
                                </div>
                            </div>
@@ -192,7 +192,7 @@
                                        <%= f.input :has_tb_treatment_completed, :label => "TB Treatment Completed?" %>
                                    </div>
                                    <div class="span4">
-                                       <%= f.input :tb_date, :as => :date_picker, :label => "TB Date" %>
+                                       <%= f.input :tb_date, :as => :date_picker, :label => "TB Date", :input_html => { :value => @kibera_child.tb_date_formatted } %>
                                    </div>
                                </div>
                                <h3>Typhoid</h3>
@@ -201,7 +201,7 @@
                                        <%= f.input :has_had_typhoid, :label => "Had Typhoid?" %>
                                    </div>
                                    <div class="offset2 span4">
-                                       <%= f.input :typhoid_date, :as => :date_picker, :label => "Typhoid Date" %>
+                                       <%= f.input :typhoid_date, :as => :date_picker, :label => "Typhoid Date", :input_html => { :value => @kibera_child.typhoid_date_formatted } %>
                                    </div>
                                </div>
                                <h3>Malaria</h3>
@@ -210,7 +210,7 @@
                                        <%= f.input :has_had_malaria, :label => "Had Malaria?" %>
                                    </div>
                                    <div class="offset2 span4">
-                                       <%= f.input :malaria_date, :as => :date_picker, :label => "Malaria Date" %>
+                                       <%= f.input :malaria_date, :as => :date_picker, :label => "Malaria Date", :input_html => { :value => @kibera_child.malaria_date_formatted } %>
                                    </div>
                                </div>
                            </div>
@@ -228,7 +228,7 @@
                                </div>
                                <div class="row">
                                    <div class="span4">
-                                          <%= f.input :hygenall_products_distribution_date, :as => :date_picker, :label => "Date Distributed" %>
+                                          <%= f.input :hygenall_products_distribution_date, :as => :date_picker, :label => "Date Distributed", :input_html => { :value => @kibera_child.hygenall_products_distribution_date_formatted } %>
                                    </div>
                                </div>
                            </div>
@@ -246,7 +246,7 @@
                                        <%= f.input :has_received_menstrual_products, :label => "Menstrual Products Provided?" %>
                                    </div>
                                    <div class="span4">
-                                       <%= f.input :menstrual_products_distribution_date, :as => :date_picker, :label => "Date of Distribution" %>
+                                       <%= f.input :menstrual_products_distribution_date, :as => :date_picker, :label => "Date of Distribution", :input_html => { :value => @kibera_child.menstrual_products_distribution_date_formatted } %>
                                    </div>
                                </div>
                            </div>
@@ -371,7 +371,7 @@
 	                      	<div class="tab-pane active" id="physical-exam-info">
 						        <div class="row">
 						           <div class="span4">
-						                  <%= f.input :physical_examination_date, :as => :date_picker, :label => "Exam Date" %>
+						                  <%= f.input :physical_examination_date, :as => :date_picker, :label => "Exam Date", :input_html => { :value => @kibera_child.physical_examination_date_formatted } %>
 						           </div>
 						        </div>
 							</div>
@@ -463,14 +463,14 @@
   </fieldset>
 </div>
 
-</div>
+	</div>
 
-  <div class="form-actions">
-    <%= f.submit 'Save', :class => 'btn btn-primary' %>
-    <%= link_to 'Cancel', :back, :class => 'btn' %>
-  </div>
+	<div class="form-actions">
+		<%= f.submit 'Save', :class => 'btn btn-primary' %>
+		<%= link_to 'Cancel', (@kibera_child.id?) ? kibera_child_path(@kibera_child) : kibera_children_path, :class => 'btn' %>
+	</div>
   
-<% end %>
+	<% end %>
 
-</div>
+	</div>
 </div>

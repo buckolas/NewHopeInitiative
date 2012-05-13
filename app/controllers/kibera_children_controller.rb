@@ -1,7 +1,8 @@
 class KiberaChildrenController < ApplicationController
+  before_filter :format_dates, :only => [:create, :update]
+  
   # GET /kibera_children
   # GET /kibera_children.json
-  
   def index
     if params[:per_page]
       session[:per_page] = params[:per_page].to_i
@@ -59,6 +60,7 @@ class KiberaChildrenController < ApplicationController
   # POST /kibera_children
   # POST /kibera_children.json
   def create
+    puts "C" + params[:kibera_child][:birth_date].to_s
     @kibera_child = KiberaChild.new(params[:kibera_child])
     @kibera_child.first_name.strip!
     @kibera_child.last_name.strip!
@@ -76,6 +78,7 @@ class KiberaChildrenController < ApplicationController
   # PUT /kibera_children/1
   # PUT /kibera_children/1.json
   def update
+    puts "U" + params[:kibera_child][:birth_date].to_s
     @kibera_child = KiberaChild.find(params[:id])
     params[:kibera_child][:first_name].strip!
     params[:kibera_child][:last_name].strip!
@@ -101,6 +104,19 @@ class KiberaChildrenController < ApplicationController
       format.html { redirect_to kibera_children_url }
       format.json { head :ok }
     end
+  end
+  
+  private 
+  
+  def format_dates
+    params[:kibera_child][:birth_date] = (params[:kibera_child][:birth_date] && params[:kibera_child][:birth_date].length > 0) ? Date.strptime(params[:kibera_child][:birth_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:assessment_documentation_date] = (params[:kibera_child][:assessment_documentation_date] && params[:kibera_child][:assessment_documentation_date].length > 0) ? Date.strptime(params[:kibera_child][:assessment_documentation_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:tb_date] = (params[:kibera_child][:tb_date] && params[:kibera_child][:tb_date].length > 0) ? Date.strptime(params[:kibera_child][:tb_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:typhoid_date] = (params[:kibera_child][:typhoid_date] && params[:kibera_child][:typhoid_date].length > 0) ? Date.strptime(params[:kibera_child][:typhoid_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:malaria_date] = (params[:kibera_child][:malaria_date] && params[:kibera_child][:malaria_date].length > 0) ? Date.strptime(params[:kibera_child][:malaria_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:hygenall_products_distribution_date] = (params[:kibera_child][:hygenall_products_distribution_date] && params[:kibera_child][:hygenall_products_distribution_date].length > 0) ? Date.strptime(params[:kibera_child][:hygenall_products_distribution_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:physical_examination_date] = (params[:kibera_child][:physical_examination_date] && params[:kibera_child][:physical_examination_date].length > 0) ? Date.strptime(params[:kibera_child][:physical_examination_date], '%m/%d/%Y') : nil
+    params[:kibera_child][:menstrual_products_distribution_date] = (params[:kibera_child][:menstrual_products_distribution_date] && params[:kibera_child][:menstrual_products_distribution_date].length > 0) ? Date.strptime(params[:kibera_child][:menstrual_products_distribution_date], '%m/%d/%Y') : nil
   end
   
 end

@@ -55,17 +55,20 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("input.date_picker").datepicker();
+	$("input.date_picker").datepicker({
+	    format: 'mm/dd/yyyy',
+		autoclose: true
+	});
 	
 	$("#expansion-link").click(function(e) {
 	    e.preventDefault();
 		if($(this).text().toLowerCase().indexOf("expand") >= 0){
 			$(this).html("Collapse All <i class='icon-resize-small'></i>")
-			$(".accordion-body").collapse('show')
+			$(".accordion-body").css('height', 'auto')
 		}
 		else{
 			$(this).html("Expand All <i class='icon-resize-full'></i>")
-			$(".accordion-body").collapse('hide')
+			$(".accordion-body").css('height', '0px')
 		}
 		return false;
 	});
