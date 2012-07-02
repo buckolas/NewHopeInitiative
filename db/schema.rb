@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419015113) do
+ActiveRecord::Schema.define(:version => 20120527212105) do
+
+  create_table "child_photos", :force => true do |t|
+    t.string   "image"
+    t.integer  "kibera_child_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "child_photos", ["kibera_child_id"], :name => "index_child_photos_on_kibera_child_id"
 
   create_table "kibera_children", :force => true do |t|
     t.string   "first_name"

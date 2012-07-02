@@ -7,19 +7,19 @@
 	<div class="span3">
 		<div id="child-photos" class="carousel">
 			<div class="carousel-inner">
-				<% if @child_photos.count > 0 %>
-					<% @child_photos.each_with_index do |photo, index| %>
+				<% if @kibera_child.child_photos.count > 0 %>
+					<% @kibera_child.child_photos.each_with_index do |photo, index| %>
 						<% if index == 0 %>
-							<div class="active item"><%= image_tag(photo) %> </div>
+							<div class="active item"><%= image_tag(photo.image_url, :onerror => 'displayImageError(this);') %></div>
 						<% else %>
-							<div class="item"><%= image_tag(photo) %> </div>
+							<div class="item"><%= image_tag(photo.image_url, :onerror => 'displayImageError(this);') %></div>
 						<% end %>
 					<% end %>
 				<% else %>
-					<div class="active item"><%= image_tag("no-image.png") %> </div>
+					<div class="active item"><%= image_tag("no-image.png") %></div>
 				<% end %>
 			</div>
-			<% if @child_photos.count > 1 %>
+			<% if @kibera_child.child_photos.count > 1 %>
 				<a class="carousel-control left" href="#child-photos" data-slide="prev">&lsaquo;</a>
 				<a class="carousel-control right" href="#child-photos" data-slide="next">&rsaquo;</a>
 			<% end %>

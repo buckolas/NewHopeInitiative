@@ -1,18 +1,24 @@
 <div class="row">
 	<div class="span12">
-		<h1><%= controller.action_name.capitalize %> Kibera Child</h1>
-		<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal' } do |f| %>
+		<% if @kibera_child.id? %>
+			<h1><%= controller.action_name.capitalize %>ing <%= @kibera_child.first_name %> <%= @kibera_child.last_name %></h1>
+		<% else %>
+			<h1>Adding <%= controller.action_name.capitalize %> Child</h1>
+		<% end %>
+		<%= simple_form_for @kibera_child, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
 			<div class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
 					<li><a href="#assessment" data-toggle="tab">Assessment Info</a></li>
 					<li><a href="#physical" data-toggle="tab">Physical Exam</a></li>
+					<% if @kibera_child.id? %>
+					<li><a href="#photos" data-toggle="tab">Photos</a></li>
+					<% end %>
 				</ul>
 			</div>
 			<div class="tab-content">
 				<div class="tab-pane active" id="general">
   					<fieldset>
-        
 						<div class="row">
 							<div class="span4">
 								<%= f.input :first_name, :label => "First Name" %>
@@ -42,106 +48,100 @@
 								<%= f.input :name_of_parent_or_guardian, :label => "Parent/Guardian" %>
 							</div>
 						</div>
-    
 					</fieldset>
-			</div>
-			<div class="tab-pane" id="assessment">
-  <fieldset>
-       <div class="row">
-               <div class="tabbable tabs-left">
-<div class="span2">
-                       <ul class="nav nav-pills nav-stacked">
-                           <li class="active"><a href="#assessment-info" data-toggle="tab">Assessment Info</a></li>
-                           <li><a href="#physical-screening" data-toggle="tab">Physical Screening</a></li>
-
-                           <li><a href="#malnutrition-signs" data-toggle="tab">Signs of Malnutrition</a></li>
-                           <li><a href="#disease-history" data-toggle="tab">Disease History</a></li>
-
-                           <li><a href="#personal-hygiene" data-toggle="tab">Personal Hygiene</a></li>
-                           <li><a href="#female-hygiene" data-toggle="tab">Feminine Hygiene</a></li>
-                           <li><a href="#living-conditions" data-toggle="tab">Living Conditions</a></li>
-                           <li><a href="#faith" data-toggle="tab">Faith</a></li>
-                           <li><a href="#clothing" data-toggle="tab">Clothing</a></li>
-                           <li><a href="#misc" data-toggle="tab">Miscellaneous Info</a></li>
-                       </ul>
-                   </div>
-                   <div class="span10">
-                       <div class="tab-content">
-                               <div class="tab-pane active" id="assessment-info">
-
-                               <div class="row">
-                                   <div class="span4">
-                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date", :input_html => { :value => @kibera_child.assessment_documentation_date_formatted } %>
-                                   </div>
-                               </div>
+				</div>
+				<div class="tab-pane" id="assessment">
+					<fieldset>
+       					<div class="row">
+			               <div class="tabbable tabs-left">
+								<div class="span2">
+			                       <ul class="nav nav-pills nav-stacked">
+			                           <li class="active"><a href="#assessment-info" data-toggle="tab">Assessment Info</a></li>
+			                           <li><a href="#physical-screening" data-toggle="tab">Physical Screening</a></li>
+			                           <li><a href="#malnutrition-signs" data-toggle="tab">Signs of Malnutrition</a></li>
+			                           <li><a href="#disease-history" data-toggle="tab">Disease History</a></li>
+			                           <li><a href="#personal-hygiene" data-toggle="tab">Personal Hygiene</a></li>
+			                           <li><a href="#female-hygiene" data-toggle="tab">Feminine Hygiene</a></li>
+			                           <li><a href="#living-conditions" data-toggle="tab">Living Conditions</a></li>
+			                           <li><a href="#faith" data-toggle="tab">Faith</a></li>
+			                           <li><a href="#clothing" data-toggle="tab">Clothing</a></li>
+			                           <li><a href="#misc" data-toggle="tab">Miscellaneous Info</a></li>
+			                       </ul>
+			                   </div>
+                   			   <div class="span10">
+                       				<div class="tab-content">
+                               			<div class="tab-pane active" id="assessment-info">
+			                               <div class="row">
+			                                   <div class="span4">
+			                                       <%= f.input :assessment_documentation_date, :as => :date_picker, :label => "Assessment Date", :input_html => { :value => @kibera_child.assessment_documentation_date_formatted } %>
+			                                   </div>
+			                               </div>
                            </div>
                            <div class="tab-pane" id="physical-screening">
-
-<h3>Body Measurements</h3>
-<div class="row">
-<div class="span4">
-        <%= f.input :height_in_cm, :label => "Height (cm)" %>
-</div>
-<div class="span4">
-        <%= f.input :weight_in_kg, :label => "Weight (kg)" %>
-</div>
-</div>
-<div class="row">
-<div class="span4">
-        <%= f.input :uam_in_cm, :label => "UAM (cm)" %>
-</div>
-</div>
-<h3>Temperature</h3>
-<div class="row">
-<div class="span4">
-        <%= f.input :assessment_temperature_in_fahrenheit, :label => "Temperature (&deg;F)" %>
-</div>
-</div>
-<h3>Vitals</h3>
-<div class="row">
-<div class="span4">
-       <%= f.input :blood_pressure_systolic, :label => "Systolic Blood Pressure" %>
-</div>
-<div class="span4">
-<%= f.input :blood_pressure_diastolic, :label => "Diastolic Blood Pressure" %>
-</div>
-</div>
-<h3>Vision</h3>
-<div class="row">
-<div class="span4">
-<%= f.input :vision_right, :label => "Right Eye" %>
-</div>
-<div class="span4">
-<%= f.input :vision_left, :label => "Left Eye" %>
-
-</div>
-</div>
-<h3>Hearing</h3>
+								<h3>Body Measurements</h3>
+								<div class="row">
+									<div class="span4">
+										<%= f.input :height_in_cm, :label => "Height (cm)" %>
+									</div>
+									<div class="span4">
+										<%= f.input :weight_in_kg, :label => "Weight (kg)" %>
+									</div>
+								</div>
+								<div class="row">
+									<div class="span4">
+								        <%= f.input :uam_in_cm, :label => "UAM (cm)" %>
+									</div>
+								</div>
+								<h3>Temperature</h3>
+								<div class="row">
+									<div class="span4">
+								        <%= f.input :assessment_temperature_in_fahrenheit, :label => "Temperature (&deg;F)" %>
+									</div>
+								</div>
+								<h3>Vitals</h3>
+								<div class="row">
+									<div class="span4">
+								    	<%= f.input :blood_pressure_systolic, :label => "Systolic Blood Pressure" %>
+									</div>
+									<div class="span4">
+										<%= f.input :blood_pressure_diastolic, :label => "Diastolic Blood Pressure" %>
+									</div>
+								</div>
+								<h3>Vision</h3>
+								<div class="row">
+									<div class="span4">
+										<%= f.input :vision_right, :label => "Right Eye" %>
+									</div>
+									<div class="span4">
+										<%= f.input :vision_left, :label => "Left Eye" %>
+									</div>
+								</div>
+								<h3>Hearing</h3>
                                <div class="row">
                                    <div class="span2">
                                        <%= f.input :has_hearing_complaints, :label => "Hearing Complaints?" %>
                                    </div>
                                </div>
-<h3>Teeth</h3>
+							   <h3>Teeth</h3>
                                <div class="row">
-<div class="span2">
-                                    <%= f.input :has_cavities, :label => "Cavities?" %>
-                                </div>
-                                   <div class="span2">
-                                    <%= f.input :has_teeth_missing, :label => "Missing Teeth?" %>
+									<div class="span2">
+                                    	<%= f.input :has_cavities, :label => "Cavities?" %>
+                                	</div>
+                                   	<div class="span2">
+                                    	<%= f.input :has_teeth_missing, :label => "Missing Teeth?" %>
                                    </div>
                                </div>
-<h3>Tongue</h3>
+							   <h3>Tongue</h3>
                                <div class="row">
-<div class="span2">
-                                    <%= f.input :has_healthy_tongue, :label => "Healthy Tongue?" %>
-                                   </div>
-                                   <div class="span2">
-                                    <%= f.input :has_red_patches, :label => "Red Patches?" %>
-                                   </div>
-                                   <div class="span2">
-                                    <%= f.input :has_evidence_of_yeast, :label => "Evidence of Yeast?" %>
-                                   </div>
+									<div class="span2">
+                                    	<%= f.input :has_healthy_tongue, :label => "Healthy Tongue?" %>
+                                   	</div>
+                                   	<div class="span2">
+                                    	<%= f.input :has_red_patches, :label => "Red Patches?" %>
+                                   	</div>
+                                   	<div class="span2">
+                                    	<%= f.input :has_evidence_of_yeast, :label => "Evidence of Yeast?" %>
+                                   	</div>
                                </div>
                            </div>
                            <div class="tab-pane" id="malnutrition-signs">
@@ -355,10 +355,10 @@
 </div>
 
 <div class="tab-pane" id="physical">
-  <fieldset>
-       <div class="row">
-               <div class="tabbable tabs-left">
-<div class="span2">
+  	<fieldset>
+		<div class="row">
+			<div class="tabbable tabs-left">
+				<div class="span2">
                        <ul class="nav nav-pills nav-stacked">
                            <li class="active"><a href="#physical-exam-info" data-toggle="tab">Physical Exam Info</a></li>
 						   <li><a href="#physical-exam-screening" data-toggle="tab">Physical Screening</a></li>
@@ -397,80 +397,91 @@
 						               <%= f.input :is_vitamins_needed, :label => "Vitamins Needed?" %>
 						           </div>
 						    	</div>
-       <div class="row">
-           <div class="span2">
-               <%= f.input :is_ear_syringing_needed, :label => "Ear Syringing Needed?" %>
-           </div>
-          <div class="span2">
-               <%= f.input :is_deworming_needed, :label => "Deworming Needed?" %>
-              </div>
-           <div class="span2">
-				<%= f.input :is_stool_sample_needed, :label => "Stool Sample Needed?" %>
-              </div>
-              <div class="span2">
-                  <%= f.input :is_dental_attention_needed, :label => "Dental Attention Needed?" %>
-              </div>
-          </div>
-          <div class="row">
-           <div class="span2">
+       							<div class="row">
+									<div class="span2">
+									    <%= f.input :is_ear_syringing_needed, :label => "Ear Syringing Needed?" %>
+									</div>
+									<div class="span2">
+									    <%= f.input :is_deworming_needed, :label => "Deworming Needed?" %>
+									   </div>
+									<div class="span2">
+										<%= f.input :is_stool_sample_needed, :label => "Stool Sample Needed?" %>
+									</div>
+									<div class="span2">
+										<%= f.input :is_dental_attention_needed, :label => "Dental Attention Needed?" %>
+									</div>
+								</div>
+          						<div class="row">
+									<div class="span2">
+										<%= f.input :is_opthamologist_needed, :label => "Opthamologist Attention Needed?" %>
+									</div>
+									<div class="span2">
+										<%= f.input :is_blood_test_needed, :label => "Blood Test Needed?" %>
+									</div>
+									<div class="span2">
+										<%= f.input :is_pain_killers_needed, :label => "Pain Killers Recommended?" %>
+									</div>
+									<div class="span2">
+										<%= f.input :is_washing_needed, :label => "Washing Recommended?" %>
+									</div>
+								</div>
+              					<div class="row">
+                  					<div class="span2">
+                       					<%= f.input :has_umbilical_hernia, :label => "Has Umbilical Hernia?" %>
+                  					</div>
+              					</div>
+          					</div>
+          					<div class="tab-pane" id="doctor-notes">
+						      	<div class="row">
+						           	<div class="span4">
+						                  <%= f.input :health_notes, :as => :text, :label => "Signs of Poor Health", :input_html => { :rows => 10 } %>
+						           	</div>
+						           	<div class="span4">
+						                  <%= f.input :observations, :as => :text, :label => "Comments", :input_html => { :rows => 10 } %>
+									</div>
+								</div>
+						       	<div class="row">
+						            <div class="span4">
+						            	<%= f.input :recommendations, :as => :text, :label => "Recommendations", :input_html => { :rows => 10 } %>
+						            </div>
+									<div class="span4">
+										<%= f.input :additional_physical_examination_notes, :as => :text, :label => "Other Notes", :input_html => { :rows => 10 } %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+  			</fieldset>
+		</div>
+		
+				<% if @kibera_child.id? %>
+					<div class="tab-pane" id="photos">
+						<div class="row">
+							<div class="span12 centered-text">
+								<h3>
+									<span class="delete-images-info"<%=' style=display:none;' if @kibera_child.child_photos.count <= 0 %>>Click on an image to delete, or</span>
+									<%= link_to content_tag('i', '', :class => 'icon-plus') + ' Upload New Photo', @kibera_child, :class => 'btn btn-mini upload-link', :title => "Upload a New Photo" %>
+								</h3>
+							</div>
+						</div>
+						<ul id="child-photos" class="thumbnails">
+							<% if @kibera_child.child_photos.count > 0 %>
+								<% @kibera_child.child_photos.each_with_index do |photo, index| %>
+									  <li class="span3">
+										<%= link_to image_tag(photo.image_url, :onerror => 'displayImageError(this);'), kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-photo-confirm', :title => "Delete This Photo", :id => photo.id %>
+									  </li>
+								<% end %>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+			</div>
 
-               <%= f.input :is_opthamologist_needed, :label => "Opthamologist Attention Needed?" %>
-              </div>
-          <div class="span2">
-
-               <%= f.input :is_blood_test_needed, :label => "Blood Test Needed?" %>
-              </div>
-              <div class="span2">
-
-                  <%= f.input :is_pain_killers_needed, :label => "Pain Killers Recommended?" %>
-              </div>
-              <div class="span2">
-
-               <%= f.input :is_washing_needed, :label => "Washing Recommended?" %>
-              </div>
-          </div>
-              <div class="row">
-                  <div class="span2">
-
-                       <%= f.input :has_umbilical_hernia, :label => "Has Umbilical Hernia?" %>
-                  </div>
-              </div>
-          </div>
-          <div class="tab-pane" id="doctor-notes">
-
-      <div class="row">
-           <div class="span4">
-                  <%= f.input :health_notes, :as => :text, :label => "Signs of Poor Health", :input_html => { :rows => 10 } %>
-           </div>
-           <div class="span4">
-                  <%= f.input :observations, :as => :text, :label => "Comments", :input_html => { :rows => 10 } %>
-
-              </div>
-</div>
-       <div class="row">
-               <div class="span4">
-                  <%= f.input :recommendations, :as => :text, :label => "Recommendations", :input_html => { :rows => 10 } %>
-              </div>
-           <div class="span4">
-               <%= f.input :additional_physical_examination_notes, :as => :text, :label => "Other Notes", :input_html => { :rows => 10 } %>
-
-           </div>
-        </div>
-    </div>
-      </div>
-      </div>
-      </div>
-  </fieldset>
-</div>
-
-	</div>
-
-	<div class="form-actions">
-		<%= f.submit 'Save', :class => 'btn btn-primary' %>
-		<%= link_to 'Cancel', (@kibera_child.id?) ? kibera_child_path(@kibera_child) : kibera_children_path, :class => 'btn' %>
-	</div>
-  
-	<% end %>
-
+			<div class="form-actions">
+				<%= f.submit 'Save', :class => 'btn btn-primary' %>
+				<%= link_to 'Cancel', (@kibera_child.id?) ? kibera_child_path(@kibera_child) : kibera_children_path, :class => 'btn' %>
+			</div>
+		<% end %>
 	</div>
 </div>

@@ -2,6 +2,7 @@ require 'rubygems'
 require 'fog'
 
 class KiberaChild < ActiveRecord::Base
+  has_many :child_photos, :dependent => :destroy
   validates_presence_of :first_name, :last_name, :gender, :grade, :birth_date
   validate :child_name_is_unique
   
@@ -59,23 +60,23 @@ class KiberaChild < ActiveRecord::Base
     age
   end
   
-  def photos
-    # create a connection
-    connection = Fog::Storage.new({
-      :provider                 => 'AWS',
-      :aws_access_key_id        => AWS_CONFIG['access_key_id'],
-      :aws_secret_access_key    => AWS_CONFIG['secret_access_key']
-    })
-
-    # the S3 bucket
-    directory = connection.directories.get(AWS_CONFIG['s3_bucket'])
-
-    # all child images
-    photos = []
-    files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
-    files.each {|file| photos << file.url(Time.now+43200) }
-    photos
-  end
+  # def photos
+  #     # create a connection
+  #     connection = Fog::Storage.new({
+  #       :provider                 => 'AWS',
+  #       :aws_access_key_id        => AWS_CONFIG['access_key_id'],
+  #       :aws_secret_access_key    => AWS_CONFIG['secret_access_key']
+  #     })
+  # 
+  #     # the S3 bucket
+  #     directory = connection.directories.get(AWS_CONFIG['s3_bucket'])
+  # 
+  #     # all child images
+  #     photos = []
+  #     files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+  #     files.each {|file| photos << file.url(Time.now+43200) }
+  #     photos
+  #   end
   
   private 
   

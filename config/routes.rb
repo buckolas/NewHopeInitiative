@@ -2,7 +2,11 @@ ChildMonitor::Application.routes.draw do
   
   resources :user_sessions
   resources :users
-  resources :kibera_children
+  
+  resources :kibera_children do
+    resources :child_photos
+  end
+  
   resources :imports
   resources :exports
   

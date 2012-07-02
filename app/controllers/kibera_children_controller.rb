@@ -31,9 +31,9 @@ class KiberaChildrenController < ApplicationController
   def show
     @kibera_child = KiberaChild.find(params[:id])
     
-    @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
-        @kibera_child.photos
-    end
+    # @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+    #         @kibera_child.photos
+    #     end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -60,7 +60,6 @@ class KiberaChildrenController < ApplicationController
   # POST /kibera_children
   # POST /kibera_children.json
   def create
-    puts "C" + params[:kibera_child][:birth_date].to_s
     @kibera_child = KiberaChild.new(params[:kibera_child])
     @kibera_child.first_name.strip!
     @kibera_child.last_name.strip!
@@ -78,7 +77,6 @@ class KiberaChildrenController < ApplicationController
   # PUT /kibera_children/1
   # PUT /kibera_children/1.json
   def update
-    puts "U" + params[:kibera_child][:birth_date].to_s
     @kibera_child = KiberaChild.find(params[:id])
     params[:kibera_child][:first_name].strip!
     params[:kibera_child][:last_name].strip!

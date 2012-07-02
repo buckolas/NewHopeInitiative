@@ -11,11 +11,30 @@
 
 
 $(document).ready(function() {
+	$("input.date_picker").datepicker({
+	    format: 'mm/dd/yyyy',
+		autoclose: true
+	});
+	
+	$("#expansion-link").click(function(e) {
+	    e.preventDefault();
+		if($(this).text().toLowerCase().indexOf("expand") >= 0){
+			$(this).html("Collapse All <i class='icon-resize-small'></i>")
+			$(".accordion-body").css('height', 'auto')
+		}
+		else{
+			$(this).html("Expand All <i class='icon-resize-full'></i>")
+			$(".accordion-body").css('height', '0px')
+		}
+		return false;
+	});
+	
 	$("a.delete-confirm").click(function(e) {
 	    e.preventDefault();
+		// TODO find out why btn-danger not working
 		var deleteHref = this.href;
 	    bootbox.confirm("Are you sure you want to delete this child? This action cannot be undone.", "Cancel", "Delete", {
-			'classname': 'btn-danger',
+			'class': 'btn-danger',
 			'callback': function(result) {
 			    if (result) {
 					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
@@ -37,7 +56,7 @@ $(document).ready(function() {
 	    e.preventDefault();
 		var deleteHref = this.href;
 	    bootbox.confirm("Are you sure you want to delete this user? This action cannot be undone.", "Cancel", "Delete", {
-			'classname': 'btn-danger',
+			'class': 'btn-danger',
 			'callback': function(result) {
 			    if (result) {
 					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
@@ -55,21 +74,110 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("input.date_picker").datepicker({
-	    format: 'mm/dd/yyyy',
-		autoclose: true
-	});
-	
-	$("#expansion-link").click(function(e) {
+	$("a.upload-link").click(function(e) {
 	    e.preventDefault();
-		if($(this).text().toLowerCase().indexOf("expand") >= 0){
-			$(this).html("Collapse All <i class='icon-resize-small'></i>")
-			$(".accordion-body").css('height', 'auto')
-		}
-		else{
-			$(this).html("Expand All <i class='icon-resize-full'></i>")
-			$(".accordion-body").css('height', '0px')
-		}
+		var childId = this.href.substring(this.href.lastIndexOf('/')+1, this.href.length)
+
+		var photoForm = '<form id="child-photo-form" enctype="multipart/form-data" method="post" action="/kibera_children/' + childId + '/child_photos' + '">'
+			+ '<input type="hidden" name="_method" value="post" />'
+            + '<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />'
+			+ '<input type="hidden" name="kibera_child_id" value="' + childId + '" />'
+			+ '<label for="image">Child Photo:</label>'
+			+ '<input type="file" id="image" name="image"/>'
+			+ '</form>';
+
+		bootbox.dialog(photoForm, [{
+		    "label" : "Cancel"
+		}, {
+		    "label" : "Upload",
+		    "callback" : function() {
+				$('#child-photo-form').ajaxForm({
+					dataType: 'json',
+					success: function(response, status){
+						$('#child-photos').append('<li class="span3"><a rel="nofollow" href="/kibera_children/' + response.kibera_child_id + '" data-method="delete" class="thumbnail delete-photo-confirm" title="Delete This Photo" id="' + response.id + '"><img alt="" onerror="displayImageError(this);" src="' + response.image.url + '"/></a></li>');
+						$('#child-photos #' + response.id).on('click', deletePhotoConfirm);
+						$('.delete-images-info').show();
+					},
+					error: function(jqXHR, status, error){
+						var errorMsg;
+						if(error && error != 'OK'){
+							errorMsg = error;
+						}
+						else if($.parseJSON(jqXHR.responseText).errors){
+							//TODO what if multiple model object errors occur on save?
+							errorMsg = $.parseJSON(jqXHR.responseText).errors;
+						}
+						else{
+							errorMsg = "please try again later.";
+						}
+						showErrorNotification('An error occurred during image upload: ' + errorMsg);
+					}
+				});
+		        $('#child-photo-form').submit();
+		    }
+		}], {
+			'header': 'Photo Uploader'
+		});
 		return false;
 	});
+	
+	$("a.delete-photo-confirm").click(deletePhotoConfirm);
 });
+
+var deletePhotoConfirm = function(e){
+	// TODO show an X on hover
+	e.preventDefault();
+	var photoLink = $(this);
+	var href = photoLink.attr('href');
+	var photoId = photoLink.attr('id');
+	var childId = href.substring(href.lastIndexOf('/')+1, href.length);
+	
+	bootbox.dialog("Are you sure you want to delete this photo? This action cannot be undone.", [{
+	    "label" : "Cancel"
+	}, {
+	    "label" : "Delete",
+		"class" : 'btn-danger',
+	    "callback" : function() {
+			var deletePhotoForm = $('<form id="delete-photo-form" method="delete" action="/kibera_children/' + childId + '/child_photos/' + photoId + '">')
+				.append('<input type="hidden" name="_method" value="delete" />')
+	            .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
+				.append('<input type="hidden" name="kibera_child_id" value="' + childId + '" />')
+				.append('<input type="hidden" name="id" value="' + photoId + '" />')
+                .appendTo('body').ajaxForm({
+					dataType: 'json',
+					success: function(response, status){
+						photoLink.parent().remove();
+						if($('#child-photos li').length <= 0){
+							$('.delete-images-info').hide();
+						}
+					},
+					error: function(jqXHR, status, error){
+						var errorMsg;
+						if(error && error != 'OK'){
+							errorMsg = error;
+						}
+						else if($.parseJSON(jqXHR.responseText).errors){
+							//TODO what if multiple model object errors occur on save?
+							errorMsg = $.parseJSON(jqXHR.responseText).errors;
+						}
+						else{
+							errorMsg = "please try again later.";
+						}
+						showErrorNotification('An error occurred during image delete: ' + errorMsg);
+					}
+				}).submit();
+	    }
+	}], {
+		'header': 'Delete Confirm'
+	});
+	return false;
+};
+
+function showErrorNotification(msg){
+	var errorHtml = '<div class="alert alert-error"><a class="close" data-dismiss="alert">x</a>' + msg + '</div>';
+	$('#content').before(errorHtml);
+};
+
+function displayImageError(elm){
+	$(elm).attr('src', '/assets/image-failure.png');
+};
