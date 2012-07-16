@@ -30,11 +30,8 @@ class KiberaChildrenController < ApplicationController
   # GET /kibera_children/1.json
   def show
     @kibera_child = KiberaChild.find(params[:id])
+    @aws_photos = @kibera_child.aws_photos
     
-    # @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
-    #         @kibera_child.photos
-    #     end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @kibera_child }
@@ -55,6 +52,7 @@ class KiberaChildrenController < ApplicationController
   # GET /kibera_children/1/edit
   def edit
     @kibera_child = KiberaChild.find(params[:id])
+    @aws_photos = @kibera_child.aws_photos
   end
 
   # POST /kibera_children
@@ -63,6 +61,7 @@ class KiberaChildrenController < ApplicationController
     @kibera_child = KiberaChild.new(params[:kibera_child])
     @kibera_child.first_name.strip!
     @kibera_child.last_name.strip!
+    
     respond_to do |format|
       if @kibera_child.save
         format.html { redirect_to @kibera_child, :notice => @kibera_child.first_name + ' ' +  @kibera_child.last_name + ' was successfully created.' }

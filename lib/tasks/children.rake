@@ -20,4 +20,5 @@ namespace :children do
        }
        puts "Successfully updated #{index} children out of #{KiberaChild.count}"
     end
+    
 end

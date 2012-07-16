@@ -465,12 +465,25 @@
 								</h3>
 							</div>
 						</div>
-						<ul id="child-photos" class="thumbnails">
+						<ul class="thumbnails">
 							<% if @kibera_child.child_photos.count > 0 %>
 								<% @kibera_child.child_photos.each_with_index do |photo, index| %>
 									  <li class="span3">
-										<%= link_to image_tag(photo.image_url, :onerror => 'displayImageError(this);'), kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-photo-confirm', :title => "Delete This Photo", :id => photo.id %>
+										<%= link_to kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-photo-confirm', :title => "Delete This Photo", :id => photo.id do %>
+											<%= image_tag(photo.image_url, :onerror => 'displayImageError(this);') %>
+											<%= image_tag('cancel.png', :class => 'cancel-photo-img') %>
+										<% end %>
 									  </li>
+								<% end %>
+							<% end %>
+							<% if @aws_photos.count > 0 %>
+								<% @aws_photos.each_with_index do |photo, index| %>
+									<li class="span3">
+										<%= link_to kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-aws-photo-confirm', :title => "Delete This Photo", :id => photo.key do %>
+											<%= image_tag(photo.url(Time.now+43200), :onerror => 'displayImageError(this);') %>
+											<%= image_tag('cancel.png', :class => 'cancel-photo-img') %>
+										<% end %>
+									</li>
 								<% end %>
 							<% end %>
 						</ul>

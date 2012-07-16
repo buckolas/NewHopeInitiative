@@ -123,18 +123,39 @@ h1,h2{
 	border-bottom:1px solid #E5E5E5;
 }
 
-form .thumbnail{
-	min-height:0;
-}
-
+/* Display of child photos in Edit view */
 form ul.thumbnails{
-	margin-bottom:0;
+	margin-left:-20px;
 }
 
-form .thumbnails > li{
-	margin-bottom:0;
+form ul.thumbnails > li{
 	margin-left: 20px;
 }
+
+form ul.thumbnails a:hover .cancel-photo-img{
+    display: block;
+}
+
+form ul.thumbnails .cancel-photo-img{
+	width:50px;
+	height:50px;
+	display:none;
+	position:absolute;
+	top:40%;
+	left:40%;
+	opacity:0.7;
+}
+
+form a.thumbnail{
+	min-height:0;
+	position:relative;
+}
+
+form a.thumbnail img{
+	max-height:195px;
+}
+
+/* End of child photos display in Edit view */
 
 #content{
 	min-height:400px;

@@ -60,23 +60,19 @@ class KiberaChild < ActiveRecord::Base
     age
   end
   
-  # def photos
-  #     # create a connection
-  #     connection = Fog::Storage.new({
-  #       :provider                 => 'AWS',
-  #       :aws_access_key_id        => AWS_CONFIG['access_key_id'],
-  #       :aws_secret_access_key    => AWS_CONFIG['secret_access_key']
-  #     })
-  # 
-  #     # the S3 bucket
-  #     directory = connection.directories.get(AWS_CONFIG['s3_bucket'])
-  # 
-  #     # all child images
-  #     photos = []
-  #     files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
-  #     files.each {|file| photos << file.url(Time.now+43200) }
-  #     photos
-  #   end
+  def aws_photos
+    # photos = []
+    # files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+    # files.each {|file| photos << file.url(Time.now+43200) }
+    # photos
+    
+    # @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+    #         @kibera_child.photos
+    #     end
+    
+    # Return all child images that are found in the root folder of the AWS bucket
+    AWS_BUCKET.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+  end
   
   private 
   

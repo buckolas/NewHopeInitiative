@@ -31,10 +31,9 @@ $(document).ready(function() {
 	
 	$("a.delete-confirm").click(function(e) {
 	    e.preventDefault();
-		// TODO find out why btn-danger not working
 		var deleteHref = this.href;
 	    bootbox.confirm("Are you sure you want to delete this child? This action cannot be undone.", "Cancel", "Delete", {
-			'class': 'btn-danger',
+			'classname': 'btn-danger',
 			'callback': function(result) {
 			    if (result) {
 					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
@@ -56,7 +55,7 @@ $(document).ready(function() {
 	    e.preventDefault();
 		var deleteHref = this.href;
 	    bootbox.confirm("Are you sure you want to delete this user? This action cannot be undone.", "Cancel", "Delete", {
-			'class': 'btn-danger',
+			'classname': 'btn-danger',
 			'callback': function(result) {
 			    if (result) {
 					$('<form method="post" action="' + deleteHref.replace('/delete', '') + '" />')
@@ -94,8 +93,8 @@ $(document).ready(function() {
 				$('#child-photo-form').ajaxForm({
 					dataType: 'json',
 					success: function(response, status){
-						$('#child-photos').append('<li class="span3"><a rel="nofollow" href="/kibera_children/' + response.kibera_child_id + '" data-method="delete" class="thumbnail delete-photo-confirm" title="Delete This Photo" id="' + response.id + '"><img alt="" onerror="displayImageError(this);" src="' + response.image.url + '"/></a></li>');
-						$('#child-photos #' + response.id).on('click', deletePhotoConfirm);
+						$('ul.thumbnails').append('<li class="span3"><a rel="nofollow" href="/kibera_children/' + response.kibera_child_id + '" data-method="delete" class="thumbnail delete-photo-confirm" title="Delete This Photo" id="' + response.id + '"><img alt="" onerror="displayImageError(this);" src="' + response.image.url + '"/><img alt="Cancel" class="cancel-photo-img" src="/assets/cancel.png"/></a></li>');
+						$('ul.thumbnails #' + response.id).on('click', deletePhotoConfirm);
 						$('.delete-images-info').show();
 					},
 					error: function(jqXHR, status, error){
@@ -121,11 +120,59 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$("a.delete-aws-photo-confirm").click(function(e){
+		e.preventDefault();
+		var photoLink = $(this);
+		var href = photoLink.attr('href');
+		var photoId = photoLink.attr('id');
+		var childId = href.substring(href.lastIndexOf('/')+1, href.length);
+
+		bootbox.dialog("Are you sure you want to delete this photo? This action cannot be undone.", [{
+		    "label" : "Cancel"
+		}, {
+		    "label" : "Delete",
+			"class" : 'btn-danger',
+		    "callback" : function() {
+				var deletePhotoForm = $('<form id="delete-aws-photo-form" method="delete" action="/kibera_children/' + childId + '/child_photos/aws">')
+					.append('<input type="hidden" name="_method" value="delete" />')
+		            .append('<input type="hidden" name="authenticity_token" value="' + AUTH_TOKEN + '" />')
+					.append('<input type="hidden" name="kibera_child_id" value="' + childId + '" />')
+					.append('<input type="hidden" name="id" value="aws" />')
+					.append('<input type="hidden" name="key" value="' + photoId + '" />')
+	                .appendTo('body').ajaxForm({
+						dataType: 'json',
+						success: function(response, status){
+							photoLink.parent().remove();
+							if($('ul.thumbnails li').length <= 0){
+								$('.delete-images-info').hide();
+							}
+						},
+						error: function(jqXHR, status, error){
+							var errorMsg;
+							if(error && error != 'OK'){
+								errorMsg = error;
+							}
+							else if($.parseJSON(jqXHR.responseText).errors){
+								//TODO what if multiple model object errors occur on save?
+								errorMsg = $.parseJSON(jqXHR.responseText).errors;
+							}
+							else{
+								errorMsg = "please try again later.";
+							}
+							showErrorNotification('An error occurred during image delete: ' + errorMsg);
+						}
+					}).submit();
+		    }
+		}], {
+			'header': 'Delete Confirm'
+		});
+		return false;
+	});
+	
 	$("a.delete-photo-confirm").click(deletePhotoConfirm);
 });
 
 var deletePhotoConfirm = function(e){
-	// TODO show an X on hover
 	e.preventDefault();
 	var photoLink = $(this);
 	var href = photoLink.attr('href');
@@ -147,7 +194,7 @@ var deletePhotoConfirm = function(e){
 					dataType: 'json',
 					success: function(response, status){
 						photoLink.parent().remove();
-						if($('#child-photos li').length <= 0){
+						if($('ul.thumbnails li').length <= 0){
 							$('.delete-images-info').hide();
 						}
 					},
