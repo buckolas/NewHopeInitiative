@@ -460,7 +460,7 @@
 						<div class="row">
 							<div class="span12 centered-text">
 								<h3>
-									<span class="delete-images-info"<%=' style=display:none;' if @kibera_child.child_photos.count <= 0 %>>Click on an image to delete, or</span>
+									<span class="delete-images-info"<%=' style=display:none;' if @kibera_child.child_photos.count + @aws_photos.count <= 0 %>>Click on an image to delete, or</span>
 									<%= link_to content_tag('i', '', :class => 'icon-plus') + ' Upload New Photo', @kibera_child, :class => 'btn btn-mini upload-link', :title => "Upload a New Photo" %>
 								</h3>
 							</div>
@@ -479,8 +479,8 @@
 							<% if @aws_photos.count > 0 %>
 								<% @aws_photos.each_with_index do |photo, index| %>
 									<li class="span3">
-										<%= link_to kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-aws-photo-confirm', :title => "Delete This Photo", :id => photo.key do %>
-											<%= image_tag(photo.url(Time.now+43200), :onerror => 'displayImageError(this);') %>
+										<%= link_to kibera_child_path(@kibera_child), :method => :delete, :class => 'thumbnail delete-aws-photo-confirm', :title => "Delete This Photo", :id => photo["key"] do %>
+											<%= image_tag(photo["url"], :onerror => 'displayImageError(this);') %>
 											<%= image_tag('cancel.png', :class => 'cancel-photo-img') %>
 										<% end %>
 									</li>

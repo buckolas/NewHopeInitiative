@@ -17,9 +17,9 @@
 					<% end %>
 					<% @aws_photos.each_with_index do |photo, index| %>
 						<% if index == 0 && @kibera_child.child_photos.count == 0 %>
-							<div class="active item"><%= image_tag(photo.url(Time.now+43200), :onerror => 'displayImageError(this);') %></div>
+							<div class="active item"><%= image_tag(photo["url"], :onerror => 'displayImageError(this);') %></div>
 						<% else %>
-							<div class="item"><%= image_tag(photo.url(Time.now+43200), :onerror => 'displayImageError(this);') %></div>
+							<div class="item"><%= image_tag(photo["url"], :onerror => 'displayImageError(this);') %></div>
 						<% end %>
 					<% end %>
 				<% else %>

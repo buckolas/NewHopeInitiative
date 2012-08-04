@@ -60,18 +60,35 @@ class KiberaChild < ActiveRecord::Base
     age
   end
   
+  # def aws_photos
+  #   # photos = []
+  #   # files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+  #   # files.each {|file| photos << file.url(Time.now+43200) }
+  #   # photos
+  #   
+  #   # @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+  #   #         @kibera_child.photos
+  #   #     end
+  #   
+  #   # Return all child images that are found in the root folder of the AWS bucket
+  #   AWS_BUCKET.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+  # end
+  
   def aws_photos
-    # photos = []
-    # files = directory.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
-    # files.each {|file| photos << file.url(Time.now+43200) }
-    # photos
+    aws_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
+      # Return all child images that are found in the root folder of the AWS bucket
+      photos = []
+      files = AWS_BUCKET.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+      files.each { |file| 
+        h = Hash.new
+        h["url"] = file.url(Time.now+43200)
+        h["key"] = file.key
+        photos << h
+      }
+      photos
+    end
     
-    # @child_photos = Rails.cache.fetch("/kibera_children/#{object_id}/photos", :expires_in => 12.hours) do
-    #         @kibera_child.photos
-    #     end
-    
-    # Return all child images that are found in the root folder of the AWS bucket
-    AWS_BUCKET.files.all(:prefix => 'img/' + first_name + ' ' + last_name)
+    aws_photos
   end
   
   private 
