@@ -175,7 +175,8 @@ form a.thumbnail img{
 }
 
 #location-map{
-	max-height:600px;
+	height:600px;
+	display:none;
 }
 
 #footer{

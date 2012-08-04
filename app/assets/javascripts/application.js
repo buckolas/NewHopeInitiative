@@ -230,6 +230,7 @@ function displayImageError(elm){
 };
 
 function fetchLocationInfo(ip, key){
+	ip = '98.194.111.85';
 	if(ip && ip.length > 0){
 		$.getJSON('http://api.ipinfodb.com/v3/ip-city/?ip='+ip+'&key='+key+'&format=json&callback=?',
 		  function(data) {
@@ -240,11 +241,22 @@ function fetchLocationInfo(ip, key){
 			var country = data.countryName;
 			var map = $('#location-map');
 			if(map){
-				map.gMap({ markers: [{ latitude: lat,
-		                              longitude: lon,
-		                              html: city + ', ' + region + ', ' + country,
-		                              popup: true }],
-		                  zoom: 6 });
+				map.show();
+				var loc = new google.maps.LatLng(lat, lon);
+				var mapOptions = {
+			      center: loc,
+			      zoom: 7,
+			      mapTypeId: google.maps.MapTypeId.ROADMAP
+			    };
+			    var gmap = new google.maps.Map(document.getElementById("location-map"), mapOptions);
+				var infowindow = new google.maps.InfoWindow({
+				    content: city+', '+region+', '+country
+				});
+				var marker = new google.maps.Marker({
+				      position: loc,
+				      map: gmap
+				  });
+				infowindow.open(gmap,marker);
 			}
 		});
 	}
