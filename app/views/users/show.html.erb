@@ -87,8 +87,19 @@
 	<% end %>
 </div>
 
+<% if current_user.is_admin? %>
+<div class="row">
+	<div id="location-map" class="span12">
+	</div>
+</div>
+<% end %>
+
 <div class="form-actions">
   <%= link_to 'Back', users_path, :class => 'btn'  %>
   <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
   <%= link_to 'Delete', user_path(@user), :method => 'delete', :class => 'btn btn-danger delete-confirm' %>
 </div>
+
+<script type="text/javascript">
+	fetchLocationInfo('<%= @user.current_login_ip  || '' %>', '<%= IPINFODB_API_KEY %>');
+</script>

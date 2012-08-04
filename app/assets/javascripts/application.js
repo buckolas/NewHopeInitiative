@@ -228,3 +228,24 @@ function showErrorNotification(msg){
 function displayImageError(elm){
 	$(elm).attr('src', '/assets/image-failure.png');
 };
+
+function fetchLocationInfo(ip, key){
+	if(ip && ip.length > 0){
+		$.getJSON('http://api.ipinfodb.com/v3/ip-city/?ip='+ip+'&key='+key+'&format=json&callback=?',
+		  function(data) {
+		    var lat = data.latitude;
+			var lon = data.longitude;
+			var city = data.cityName;
+			var region = data.regionName;
+			var country = data.countryName;
+			var map = $('#location-map');
+			if(map){
+				map.gMap({ markers: [{ latitude: lat,
+		                              longitude: lon,
+		                              html: city + ', ' + region + ', ' + country,
+		                              popup: true }],
+		                  zoom: 6 });
+			}
+		});
+	}
+}
