@@ -88,10 +88,16 @@
 </div>
 
 <% if current_user.is_admin? %>
-<div class="row">
-	<div id="location-map" class="span12">
+	<%= javascript_include_tag "http://maps.google.com/maps?file=api&amp;v=2&amp;key="+GOOGLE_API_KEY %>
+	
+	<div class="row">
+		<div id="location-map" class="span12">
+		</div>
 	</div>
-</div>
+	
+	<script type="text/javascript">
+		fetchLocationInfo('<%= @user.current_login_ip  || '' %>', '<%= IPINFODB_API_KEY %>');
+	</script>
 <% end %>
 
 <div class="form-actions">
@@ -99,7 +105,3 @@
   <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
   <%= link_to 'Delete', user_path(@user), :method => 'delete', :class => 'btn btn-danger delete-confirm' %>
 </div>
-
-<script type="text/javascript">
-	fetchLocationInfo('<%= @user.current_login_ip  || '' %>', '<%= IPINFODB_API_KEY %>');
-</script>
