@@ -230,7 +230,6 @@ function displayImageError(elm){
 };
 
 function fetchLocationInfo(ip, key){
-	ip = '98.194.111.85';
 	if(ip && ip.length > 0){
 		$.getJSON('http://api.ipinfodb.com/v3/ip-city/?ip='+ip+'&key='+key+'&format=json&callback=?',
 		  function(data) {
